@@ -44,7 +44,7 @@ R = R[0:num_movies, 0:num_users]
 J, grad = cofiCostFunc(X, Theta, Y, R, num_users, num_movies, num_features, 0)
 # J = cofiCostFunc([X(:); Theta(:)], Y, R, num_users, num_movies, num_features, 0);
 
-print('[Cost at loaded parameters: ',J,'(this value should be about 22.22)]')
+print('[Cost at loaded parameters: ', J, '(this value should be about 22.22)]')
 print('grad = ', grad)
 
 # input('Program paused. Press enter to continue.')
