@@ -30,16 +30,21 @@ num_users = 4
 num_movies = 5
 num_features = 3
 
-X = mat_params.get('X')[1:num_movies, 1:num_features]
-Theta = mat_params.get('Theta')[1:num_users, 1:num_features]
+X = mat_params.get('X')[0:num_movies, 0:num_features]
+Theta = mat_params.get('Theta')[0:num_users, 0:num_features]
 
-Y = Y[1:num_movies, 1:num_users]
-R = R[1:num_movies, 1:num_users]
+Y = Y[0:num_movies, 0:num_users]
+R = R[0:num_movies, 0:num_users]
 
 # Evaluate cost function
-J = cofiCostFunc()
+# params = (X[:], Theta[:])
+# print(params)
+
+# todo we need reshape here?
+J, grad = cofiCostFunc(X, Theta, Y, R, num_users, num_movies, num_features, 0)
 # J = cofiCostFunc([X(:); Theta(:)], Y, R, num_users, num_movies, num_features, 0);
 
 print('[Cost at loaded parameters: ',J,'(this value should be about 22.22)]')
+print('grad = ', grad)
 
-input('Program paused. Press enter to continue.')
+# input('Program paused. Press enter to continue.')
