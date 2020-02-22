@@ -1,6 +1,7 @@
 import scipy.io as sio
 import numpy as np
 
+from ml.checkCostFunction import checkCostFunction
 from ml.cost import cofiCostFunc
 
 print('Loading movie ratings dataset.\n')
@@ -48,3 +49,15 @@ print('[Cost at loaded parameters: ', J, '(this value should be about 22.22)]')
 print('grad = ', grad)
 
 # input('Program paused. Press enter to continue.')
+
+# ============== Part 3: Collaborative Filtering Gradient ==============
+#  Once your cost function matches up with ours, you should now implement
+#  the collaborative filtering gradient function. Specifically, you should
+#  complete the code in cofiCostFunc.m to return the grad argument.
+#
+print('\nChecking Gradients (without regularization) ... \n')
+
+#  Check gradients by running checkNNGradients
+checkCostFunction()
+
+#input('\nProgram paused. Press enter to continue.\n')
