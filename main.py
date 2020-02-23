@@ -45,7 +45,6 @@ params = np.concatenate((X.flatten(), Theta.flatten()))
 J, grad = cofiCostFunc(params, Y, R, num_users, num_movies, num_features, 0)
 
 print('[Cost at loaded parameters: ', J, '(this value should be about 22.22)]')
-print('grad = ', grad)
 
 # input('Program paused. Press enter to continue.')
 

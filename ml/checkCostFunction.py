@@ -24,14 +24,10 @@ def checkCostFunction(**kwargs):
     num_movies = Y.shape[0]
     num_features = Theta_t.shape[1]
 
-    X_grad = np.zeros(np.shape(X))
-    Theta_grad = np.zeros(np.shape(Theta))
-    numgrad = np.concatenate((X_grad.flatten(), Theta_grad.flatten()))
-
-    #numgrad = computeNumericalGradient(@ (t) cofiCostFunc(t, Y, R, num_users, num_movies,num_features, lambda_reg),
-    #X, Theta)
-
     params = np.concatenate((X.flatten(), Theta.flatten()))
+
+    numgrad = computeNumericalGradient(cofiCostFunc, params, Y, R, num_users, num_movies, num_features, lambda_reg)
+
     (cost, grad) = cofiCostFunc(params, Y, R, num_users, num_movies, num_features, lambda_reg)
 
     diff = np.linalg.norm(numgrad - grad) / np.linalg.norm(numgrad + grad)

@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def computeNumericalGradient(J, theta):
+def computeNumericalGradient(J, theta, *args):
     # COMPUTENUMERICALGRADIENT Computes the gradient using "finite differences"
     # and gives us a numerical estimate of the gradient.
     #   numgrad = COMPUTENUMERICALGRADIENT(J, theta) computes the numerical
@@ -19,13 +19,13 @@ def computeNumericalGradient(J, theta):
     numgrad = np.zeros(theta.shape)
     perturb = np.zeros(theta.shape)
     e = 1e-4
-    for p in range(np.numel(theta)):
+    for p in range(theta.size):
         # Set perturbation vector
         perturb[p] = e
-        loss1 = J(theta - perturb)
-        loss2 = J(theta + perturb)
+        loss1 = J(theta - perturb, *args)
+        loss2 = J(theta + perturb, *args)
         # Compute Numerical Gradient
-        numgrad[p] = (loss2 - loss1) / (2*e)
+        numgrad[p] = (loss2[0] - loss1[0]) / (2*e)
         perturb[p] = 0
 
     return numgrad
