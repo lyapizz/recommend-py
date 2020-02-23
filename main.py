@@ -46,8 +46,6 @@ J, grad = cofiCostFunc(params, Y, R, num_users, num_movies, num_features, 0)
 
 print('[Cost at loaded parameters: ', J, '(this value should be about 22.22)]')
 
-# input('Program paused. Press enter to continue.')
-
 # ============== Part 3: Collaborative Filtering Gradient ==============
 #  Once your cost function matches up with ours, you should now implement
 #  the collaborative filtering gradient function. Specifically, you should
@@ -58,4 +56,4 @@ print('\nChecking Gradients (without regularization) ... \n')
 #  Check gradients by running checkNNGradients
 checkCostFunction()
 
-# input('\nProgram paused. Press enter to continue.\n')
+
