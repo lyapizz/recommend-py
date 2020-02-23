@@ -1,11 +1,13 @@
 import scipy.io as sio
 import numpy as np
 
+from scipy.io import loadmat
+
 from ml.checkCostFunction import checkCostFunction
 from ml.cost import cofiCostFunc
 
 print('Loading movie ratings dataset.\n')
-mat_contents = sio.loadmat('ml/resources/ex8_movies.mat')
+mat_contents = loadmat('ml/resources/ex8_movies.mat')
 #  Y is a 1682x943 matrix, containing ratings (1-5) of 1682 movies on
 #  943 users
 #
@@ -15,9 +17,9 @@ mat_contents = sio.loadmat('ml/resources/ex8_movies.mat')
 #  From the matrix, we can compute statistics like average rating.
 
 (Y, R) = (mat_contents.get("Y"), mat_contents.get("R"))
-print('Average rating for movie 1 (Toy Story): ', np.mean(Y[0][R[0, :]]),  '/ 5 \n')
+print('Average rating for movie 1 (Toy Story): ', np.mean(Y[0][R[0, :]]), '/ 5 \n')
 
-#input('Program paused. Press enter to continue.')
+# input('Program paused. Press enter to continue.')
 # ============ Part 2: Collaborative Filtering Cost Function ===========
 #  You will now implement the cost function for collaborative filtering.
 #  To help you debug your cost function, we have included set of weights
@@ -25,7 +27,7 @@ print('Average rating for movie 1 (Toy Story): ', np.mean(Y[0][R[0, :]]),  '/ 5 
 #  cofiCostFunc.m to return J.
 
 #  Load pre-trained weights (X, Theta, num_users, num_movies, num_features)
-mat_params = sio.loadmat('ml/resources/ex8_movieParams.mat')
+mat_params = loadmat('ml/resources/ex8_movieParams.mat')
 #  Reduce the data set size so that this runs faster
 num_users = 4
 num_movies = 5
@@ -37,13 +39,10 @@ Theta = mat_params.get('Theta')[0:num_users, 0:num_features]
 Y = Y[0:num_movies, 0:num_users]
 R = R[0:num_movies, 0:num_users]
 
+# shape matrix to vector for quick calculations
+params = np.concatenate((X.flatten(), Theta.flatten()))
 # Evaluate cost function
-# params = (X[:], Theta[:])
-# print(params)
-
-# todo we need reshape here?
-J, grad = cofiCostFunc(X, Theta, Y, R, num_users, num_movies, num_features, 0)
-# J = cofiCostFunc([X(:); Theta(:)], Y, R, num_users, num_movies, num_features, 0);
+J, grad = cofiCostFunc(params, Y, R, num_users, num_movies, num_features, 0)
 
 print('[Cost at loaded parameters: ', J, '(this value should be about 22.22)]')
 print('grad = ', grad)
@@ -60,4 +59,4 @@ print('\nChecking Gradients (without regularization) ... \n')
 #  Check gradients by running checkNNGradients
 checkCostFunction()
 
-#input('\nProgram paused. Press enter to continue.\n')
+# input('\nProgram paused. Press enter to continue.\n')
