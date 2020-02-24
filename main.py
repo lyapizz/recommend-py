@@ -67,6 +67,16 @@ J, grad = cofiCostFunc(params, Y, R, num_users, num_movies, num_features, 1.5)
 
 print('Cost at loaded parameters (lambda = 1.5): ', J,'\n(this value should be about 31.34)\n')
 
-input("")
+# ======= Part 5: Collaborative Filtering Gradient Regularization ======
+#  Once your cost matches up with ours, you should proceed to implement
+#  regularization for the gradient.
+#
+
+print('\nChecking Gradients (with regularization) ... \n')
+
+#  Check gradients by running checkNNGradients
+checkCostFunction(lambda_reg = 1.5)
+
+
 
 

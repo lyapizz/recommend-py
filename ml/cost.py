@@ -22,8 +22,8 @@ def cofiCostFunc(params, Y, R, num_users, num_movies, num_features, lambda_reg):
     J = J + theta_reg + x_reg
 
     # calculate gradients
-    X_grad = np.dot(errMatrix, Theta)
-    Theta_grad = np.dot(errMatrix.T, X)
+    X_grad = np.dot(errMatrix, Theta) + lambda_reg*X
+    Theta_grad = np.dot(errMatrix.T, X) + lambda_reg*Theta
 
     grad = np.concatenate((X_grad.flatten(), Theta_grad.flatten()))
     return J, grad
