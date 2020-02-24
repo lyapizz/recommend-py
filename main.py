@@ -5,6 +5,7 @@ from scipy.io import loadmat
 
 from ml.checkCostFunction import checkCostFunction
 from ml.cost import cofiCostFunc
+from ml.loadMovieList import loadMovieList
 
 print('Loading movie ratings dataset.\n')
 mat_contents = loadmat('ml/resources/ex8_movies.mat')
@@ -65,7 +66,7 @@ checkCostFunction()
 #  Evaluate cost function
 J, grad = cofiCostFunc(params, Y, R, num_users, num_movies, num_features, 1.5)
 
-print('Cost at loaded parameters (lambda = 1.5): ', J,'\n(this value should be about 31.34)\n')
+print('Cost at loaded parameters (lambda = 1.5): ', J, '\n(this value should be about 31.34)\n')
 
 # ======= Part 5: Collaborative Filtering Gradient Regularization ======
 #  Once your cost matches up with ours, you should proceed to implement
@@ -75,8 +76,39 @@ print('Cost at loaded parameters (lambda = 1.5): ', J,'\n(this value should be a
 print('\nChecking Gradients (with regularization) ... \n')
 
 #  Check gradients by running checkNNGradients
-checkCostFunction(lambda_reg = 1.5)
+checkCostFunction(lambda_reg=1.5)
 
+## ============== Part 6: Entering ratings for a new user ===============
+#  Before we will train the collaborative filtering model, we will first
+#  add ratings that correspond to a new user that we just observed. This
+#  part of the code will also allow you to put in your own ratings for the
+#  movies in our dataset!
+#
+movieList = loadMovieList()
 
+#  Initialize my ratings
+my_ratings = np.zeros(len(movieList))
 
+# Check the file movie_idx.txt for id of each movie in our dataset
+# For example, Toy Story (1995) has ID 1, so to rate it "4", you can set
+my_ratings[1] = 4
 
+# Or suppose did not enjoy Silence of the Lambs (1991), you can set
+my_ratings[98] = 2
+
+# We have selected a few movies we liked / did not like and the ratings we
+# gave are as follows:
+my_ratings[7] = 3
+my_ratings[12] = 5
+my_ratings[54] = 4
+my_ratings[64] = 5
+my_ratings[66] = 3
+my_ratings[69] = 5
+my_ratings[183] = 4
+my_ratings[226] = 5
+my_ratings[355] = 5
+
+print('\n\nNew user ratings:\n')
+for i in range(1, len(my_ratings)):
+    if my_ratings[i] != 0:
+        print('Rated ', my_ratings[i], ' for ', movieList[i])
