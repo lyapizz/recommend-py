@@ -16,9 +16,21 @@ def cofiCostFunc(params, Y, R, num_users, num_movies, num_features, lambda_reg):
     errMatrix = np.dot(X, Theta.T) * R - Y
     J = (errMatrix * errMatrix).sum() / 2
 
+    theta_reg = calcRegulatizationSummand(Theta, lambda_reg)
+    x_reg = calcRegulatizationSummand(X, lambda_reg)
+    J = J + theta_reg + x_reg
+
     # calculate gradients
     X_grad = np.dot(errMatrix, Theta)
     Theta_grad = np.dot(errMatrix.T, X)
 
     grad = np.concatenate((X_grad.flatten(), Theta_grad.flatten()))
     return J, grad
+
+# calculate regulatization summand for Theta and X
+def calcRegulatizationSummand(matrix, lambda_reg):
+    reg = 0
+    for j in range(matrix.shape[0]):
+        for k in range(matrix.shape[1]):
+            reg = reg + matrix[j][k] * matrix[j][k]
+    return lambda_reg * reg / 2

@@ -56,4 +56,17 @@ print('\nChecking Gradients (without regularization) ... \n')
 #  Check gradients by running checkNNGradients
 checkCostFunction()
 
+# ========= Part 4: Collaborative Filtering Cost Regularization ========
+#  Now, you should implement regularization for the cost function for
+#  collaborative filtering. You can implement it by adding the cost of
+#  regularization to the original cost computation.
+#
+
+#  Evaluate cost function
+J, grad = cofiCostFunc(params, Y, R, num_users, num_movies, num_features, 1.5)
+
+print('Cost at loaded parameters (lambda = 1.5): ', J,'\n(this value should be about 31.34)\n')
+
+input("")
+
 
