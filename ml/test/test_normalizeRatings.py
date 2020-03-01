@@ -12,6 +12,11 @@ class Test(TestCase):
         (Ynorm, Ymean) = normalizeRatings(Y, R)
 
         expectedYmean = np.array([[2.5], [2.5], [2], [2.25], [1.6666666666666667]])
-        expectedYnorm = np.array([[2.5, 2.5, -2.5, -2.5], [2.5, 0, 0, -2.5], [0, 2, -2, 0], [-2.25, -2.25, 2.75, 1.75], [-1.6666666666666667, -1.6666666666666667, 3.333333333333333, 0]])
+        expectedYnorm = np.array([
+            [2.5                , 2.5                , -2.5             , -2.5],
+            [2.5                , 0                  , 0                , -2.5],
+            [0                  , 2                  , -2               , 0],
+            [-2.25              , -2.25              , 2.75             , 1.75],
+            [-1.6666666666666667, -1.6666666666666667, 3.333333333333333, 0]])
         self.assertTrue((expectedYmean == Ymean).all())
         self.assertTrue((expectedYnorm == Ynorm).all())
