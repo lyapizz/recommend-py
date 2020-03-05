@@ -12,9 +12,11 @@ from scipy.optimize import minimize
 #
 from ml.cost import cofiCostFuncCost, cofiCostFuncGrad
 from ml.normalizeRatings import normalizeRatings
+from ml.util import filterFilmsWithoutReview
 
 
 def train(num_features, **kwargs):
+    # todo calculate R at the end
     if 'Y' in kwargs and 'R' in kwargs:
         Y = kwargs.get('Y')
         R = kwargs.get('R')
@@ -29,6 +31,9 @@ def train(num_features, **kwargs):
 
     lambda_reg = kwargs.get('lambda_reg', 10)
     maxiter = kwargs.get('maxiter', 10)
+
+    minimumReviewsCount= kwargs.get('minimumReviewsCount', 5)
+    R = filterFilmsWithoutReview(Y, R, minimumReviewsCount)
 
     print('\nTraining collaborative filtering...\n')
     #  Load data
