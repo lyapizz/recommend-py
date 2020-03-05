@@ -28,6 +28,8 @@ def train(num_features, **kwargs):
         R = np.column_stack((my_ratings != 0, R))
 
     lambda_reg = kwargs.get('lambda_reg', 10)
+    maxiter = kwargs.get('maxiter', 10)
+
     print('\nTraining collaborative filtering...\n')
     #  Load data
 
@@ -47,7 +49,7 @@ def train(num_features, **kwargs):
     # # Set Regularization
     start_time = time.time()
     localMinimum = scipy.optimize.fmin_cg(cofiCostFuncCost, initial_parameters, fprime=cofiCostFuncGrad,
-                                          args=(Ynorm, R, num_users, num_movies, num_features, lambda_reg))
+                                          args=(Ynorm, R, num_users, num_movies, num_features, lambda_reg), maxiter=maxiter)
     print("--- %s seconds ---" % (time.time() - start_time))
     # print ('localMinimum = ', localMinimum)
     # theta = minimize(cofiCostFuncSingle, initial_parameters,
@@ -58,6 +60,7 @@ def train(num_features, **kwargs):
     X = np.reshape(localMinimum[0:num_movies * num_features], (num_movies, num_features))
     Theta = np.reshape(localMinimum[num_movies * num_features:], (num_users, num_features))
     print('Recommender system learning completed.\n')
-    print('\nProgram paused. Press enter to continue.\n')
 
-    return {'X': X, 'Theta': Theta, 'Y': Y, 'Ymean': Ymean, 'localMinimum': localMinimum}
+    J = cofiCostFuncCost(np.concatenate((X.flatten(), Theta.flatten())), Ynorm, R, num_users, num_movies, num_features, lambda_reg)
+
+    return {'X': X, 'Theta': Theta, 'Y': Y, 'Ymean': Ymean, 'localMinimum': localMinimum, 'J' : J}
