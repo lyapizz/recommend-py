@@ -1,6 +1,6 @@
 import numpy as np
 
-from ml.loadMovieList import loadMovieList
+from ml.test.loadMovieList import loadMovieList
 
 
 ## ============== Part 6: Entering ratings for a new user ===============

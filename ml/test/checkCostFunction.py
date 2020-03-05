@@ -2,7 +2,7 @@ import numpy as np
 
 from numpy.random import rand
 from ml.computeNumericalGradient import computeNumericalGradient
-from ml.cost import cofiCostFunc
+from ml.cost import cofiCostFuncGrad, cofiCostFuncCost
 
 
 def checkCostFunction(**kwargs):
@@ -26,9 +26,9 @@ def checkCostFunction(**kwargs):
 
     params = np.concatenate((X.flatten(), Theta.flatten()))
 
-    numgrad = computeNumericalGradient(cofiCostFunc, params, Y, R, num_users, num_movies, num_features, lambda_reg)
+    numgrad = computeNumericalGradient(cofiCostFuncCost, params, Y, R, num_users, num_movies, num_features, lambda_reg)
 
-    (cost, grad) = cofiCostFunc(params, Y, R, num_users, num_movies, num_features, lambda_reg)
+    grad = cofiCostFuncGrad(params, Y, R, num_users, num_movies, num_features, lambda_reg)
 
     diff = np.linalg.norm(numgrad - grad) / np.linalg.norm(numgrad + grad)
     return diff

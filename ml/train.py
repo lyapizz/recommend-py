@@ -14,23 +14,23 @@ from ml.cost import cofiCostFuncCost, cofiCostFuncGrad
 from ml.normalizeRatings import normalizeRatings
 
 
-def train(my_ratings):
+def train(num_features, **kwargs):
+    if 'Y' in kwargs and 'R' in kwargs:
+        Y = kwargs.get('Y')
+        R = kwargs.get('R')
+    else:
+        mat_contents = loadmat('ml/test/resources/ex8_movies.mat')
+        (Y, R) = (mat_contents.get("Y"), mat_contents.get("R"))
+    #  Add our own ratings to the data matrix
+    if 'my_ratings' in kwargs:
+        my_ratings = kwargs.get('my_ratings')
+        Y = np.column_stack((my_ratings, Y))
+        R = np.column_stack((my_ratings != 0, R))
+
+    lambda_reg = kwargs.get('lambda_reg', 10)
     print('\nTraining collaborative filtering...\n')
     #  Load data
-    mat_contents = loadmat('ml/test/resources/ex8_movies.mat')
-    (Y, R) = (mat_contents.get("Y"), mat_contents.get("R"))
-    #  Y is a 1682x943 matrix, containing ratings (1-5) of 1682 movies by
-    #  943 users
-    #
-    #  R is a 1682x943 matrix, where R(i,j) = 1 if and only if user j gave a
-    #  rating to movie i
-    #  Add our own ratings to the data matrix
-    Y = np.column_stack((my_ratings, Y))
-    R = np.column_stack((my_ratings != 0, R))
-    # Test example from exercies
-    num_features = 10
-    # Y = np.array([[5, 5, 1, 1], [5, 0, 0, 1], [0, 4, 1, 0], [1, 1, 5, 4], [1, 1, 5, 0]])
-    # R = np.array([[1, 1, 1, 1], [1, 0, 0, 1], [0, 1, 1, 0], [1, 1, 1, 1], [1, 1, 1, 0]])
+
     # #  Normalize Ratings
     (Ynorm, Ymean) = normalizeRatings(Y, R)
     #
@@ -45,20 +45,19 @@ def train(my_ratings):
     initial_parameters = np.concatenate((X.flatten(), Theta.flatten()))
     #
     # # Set Regularization
-    lambda_reg = 10
     start_time = time.time()
-    res1 = scipy.optimize.fmin_cg(cofiCostFuncCost, initial_parameters, fprime=cofiCostFuncGrad,
-                                  args=(Ynorm, R, num_users, num_movies, num_features, lambda_reg))
+    localMinimum = scipy.optimize.fmin_cg(cofiCostFuncCost, initial_parameters, fprime=cofiCostFuncGrad,
+                                          args=(Ynorm, R, num_users, num_movies, num_features, lambda_reg))
     print("--- %s seconds ---" % (time.time() - start_time))
-    # print ('res1 = ', res1)
+    # print ('localMinimum = ', localMinimum)
     # theta = minimize(cofiCostFuncSingle, initial_parameters,
     #                 args=(Ynorm, R, num_users, num_movies, num_features, lambda_reg), method='Nelder-Mead')
     # theta = theta.x
     #
     # Unfold the returned theta back into X and Theta
-    X = np.reshape(res1[0:num_movies * num_features], (num_movies, num_features))
-    Theta = np.reshape(res1[num_movies * num_features:], (num_users, num_features))
+    X = np.reshape(localMinimum[0:num_movies * num_features], (num_movies, num_features))
+    Theta = np.reshape(localMinimum[num_movies * num_features:], (num_users, num_features))
     print('Recommender system learning completed.\n')
     print('\nProgram paused. Press enter to continue.\n')
 
-    return {'X': X, 'Theta': Theta, 'Y' : Y, 'Ymean' : Ymean}
+    return {'X': X, 'Theta': Theta, 'Y': Y, 'Ymean': Ymean, 'localMinimum': localMinimum}

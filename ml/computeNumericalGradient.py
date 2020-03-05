@@ -25,7 +25,7 @@ def computeNumericalGradient(J, theta, *args):
         loss1 = J(theta - perturb, *args)
         loss2 = J(theta + perturb, *args)
         # Compute Numerical Gradient
-        numgrad[p] = (loss2[0] - loss1[0]) / (2*e)
+        numgrad[p] = (loss2 - loss1) / (2*e)
         perturb[p] = 0
 
     return numgrad
