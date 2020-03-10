@@ -13,4 +13,4 @@ As output you will get top 10 recommendations based on your ratings using collab
 What's next:
 - DB to store users and films. Currently I consider mongoDB for it
 - User Interface for voting for a film
-- New modern films, currently all films in db is below 2000 year.
+- New modern films, currently all films in db are below 2000 year.
