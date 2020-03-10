@@ -1,4 +1,5 @@
-from numpy import mean, zeros
+from numpy import mean, zeros, NaN, nanmean
+
 
 def normalizeRatings(Y, R):
     # NORMALIZERATINGS Preprocess data by subtracting mean rating for every
@@ -13,6 +14,7 @@ def normalizeRatings(Y, R):
     Ynorm = zeros(Y.shape)
     for i in range(m):
         idx = R[i, :] == 1
-        Ymean[i] = mean(Y[i, idx])
-        Ynorm[i, idx] = Y[i, idx] - Ymean[i]
+        if Y[i, idx].size:
+            Ymean[i] = mean(Y[i, idx])
+            Ynorm[i, idx] = Y[i, idx] - Ymean[i]
     return (Ynorm, Ymean)

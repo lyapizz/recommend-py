@@ -8,7 +8,7 @@ def loadMovieList():
 
 
     ## Read the fixed movieulary list
-    fid = open('ml/test/resources/movie_ids.txt')
+    fid = open('movie_ids.txt')
 
     movieList = dict()
     for line in fid:
