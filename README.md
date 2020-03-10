@@ -1,4 +1,4 @@
-Don't know which film to watch tonight? Use recommend-py to know it.
+Don't know which film to watch tonight? Use recommend-py to get it.
 
 **HowTO:**
 
@@ -14,3 +14,9 @@ As output you will get top 10 recommendations based on your ratings using collab
 - DB to store users and films. Currently I consider mongoDB for it
 - User Interface for voting for a film
 - New modern films, currently all films in db are below 2000 year.
+
+**Keywords:**
+ - python
+ - machine learning
+ - collaborative filtering
+ - film recommendations
