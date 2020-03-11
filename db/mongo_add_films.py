@@ -8,13 +8,6 @@ db = client.recommend
 films = db.films
 
 moviesFromFile = loadMovieListObj()
-
-filmDocumentTemplate = {
-  "film_ID": 0,
-  "title": "Toy Story",
-  "year": 1995
-}
-
 for v in moviesFromFile.values():
   films.insert_one(v.__dict__)
 
