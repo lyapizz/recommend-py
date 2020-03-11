@@ -1,6 +1,6 @@
 import numpy as np
 
-from ml.test.loadMovieList import loadMovieList
+from ml.test.loadMovieList import loadMovieListObj, loadMovieList
 
 
 ## ============== Part 6: Entering ratings for a new user ===============
@@ -11,7 +11,8 @@ from ml.test.loadMovieList import loadMovieList
 #
 
 def addNewRecommendations(my_ratings_dict):
-    movieList = loadMovieList()
+    movieList = loadMovieListObj()
+    movieListOrig = loadMovieList()
     #  Initialize my ratings
     my_ratings = np.zeros(len(movieList))
     # Check the file movie_idx.txt for id of each movie in our dataset
@@ -30,12 +31,12 @@ def printTopRecommendations(params):
     p = np.dot(X, Theta.T)
     userId = 0
     my_predictions = p[:, userId] + Ymean[:, 0]
-    movieList = loadMovieList()
+    movieList = loadMovieListObj()
     print('\nTop recommendations for you:\n')
     r = sorted(enumerate(my_predictions), key=lambda x: x[1], reverse=True)
     count = 10
     for item in r:
-        print('Predicting rating %.1f for movie %s' % (item[1], movieList[item[0] + 1]))
+        print('Predicting rating %.1f for movie %s' % (item[1], movieList[item[0] + 1].title))
         count = count - 1
         if count == 0:
             break
