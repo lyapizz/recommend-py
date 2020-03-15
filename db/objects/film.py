@@ -10,6 +10,3 @@ class Film:
         self.film_ID = film_ID
         self.title = title
         self.year = year
-
-    # def toJSON(self):
-    #     return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)

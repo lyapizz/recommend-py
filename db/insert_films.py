@@ -1,5 +1,4 @@
-# Connect to MongoDB instance running on cloud
-import json
+# todo remove this file after init db
 import pymongo as pymongo
 from ml.test.loadMovieList import loadMovieList
 

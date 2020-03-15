@@ -1,7 +1,6 @@
 import numpy as np
 
-from db.loadFilmsMap import loadFilmsMap
-from ml.test.loadMovieList import loadMovieList
+from db.load_films import loadFilmsMap
 
 
 ## ============== Part 6: Entering ratings for a new user ===============
