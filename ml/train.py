@@ -10,7 +10,7 @@ from scipy.optimize import minimize
 #  Now, you will train the collaborative filtering model on a movie rating
 #  dataset of 1682 movies and 943 users
 #
-from db.load_ratings import loadRatingsBinary
+from db.load_ratings import loadRatingsBinary, loadRatingsColumns
 from ml.cost import cofiCostFuncCost, cofiCostFuncGrad
 from ml.normalizeRatings import normalizeRatings
 from ml.util import filterFilmsWithoutReview
@@ -22,7 +22,7 @@ def train(num_features, **kwargs):
         Y = kwargs.get('Y')
         R = kwargs.get('R')
     else:
-        (Y, R) = loadRatingsBinary()
+        (Y, R) = loadRatingsColumns()
     #  Add our own ratings to the data matrix
     if 'my_ratings' in kwargs:
         my_ratings = kwargs.get('my_ratings')

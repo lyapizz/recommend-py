@@ -1,7 +1,6 @@
 from activities.actions import addNewRecommendations, printTopRecommendations
 from ml.train import train
 import json
-import numpy as np
 
 ## ============== Part 6: Entering ratings for a new user ===============
 fp = open('my_ratings.json')
