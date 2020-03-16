@@ -3,14 +3,13 @@ import time
 import numpy as np
 import scipy as scipy
 
-from scipy.io import loadmat
 from scipy.optimize import minimize
 
 ## ================== Part 7: Learning Movie Ratings ====================
 #  Now, you will train the collaborative filtering model on a movie rating
 #  dataset of 1682 movies and 943 users
 #
-from db.load_ratings import loadRatingsBinary, loadRatingsColumns
+from db.ratings.load_ratings import loadRatingsColumns
 from ml.cost import cofiCostFuncCost, cofiCostFuncGrad
 from ml.normalizeRatings import normalizeRatings
 from ml.util import filterFilmsWithoutReview
