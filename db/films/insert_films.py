@@ -19,6 +19,3 @@ def insertFilm(data):
   films = getCollection()
   data['Film_ID'] = films.count_documents({})
   films.insert_one(data)
-
-getCollection().remove({})
-insertDefaultFilms()
