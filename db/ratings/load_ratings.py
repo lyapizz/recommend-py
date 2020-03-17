@@ -1,12 +1,7 @@
-import json
 import pickle
 
 import numpy as np
 import pymongo as pymongo
-from bson import json_util
-from bson.json_util import dumps
-
-from db.objects.film import Film
 
 
 def loadRatingsBinary():

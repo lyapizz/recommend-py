@@ -39,7 +39,7 @@ def printTopRecommendations(params, name):
     r = sorted(enumerate(my_predictions), key=lambda x: x[1], reverse=True)
     count = 10
     for item in r:
-        print('Predicting rating %.1f for movie %s' % (item[1], movieList[item[0] + 1].title))
+        print('Predicting rating %.1f for movie %s' % (item[1], movieList[item[0] + 1]["Title"]))
         count = count - 1
         if count == 0:
             break
