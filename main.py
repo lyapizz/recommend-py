@@ -1,26 +1,41 @@
 from activities.actions import addNewRecommendations, printTopRecommendations
+from db.ratings.insert_ratings_columns import insert_ratings
+from db.users.actions import insert_user, get_user_by_name
 from ml.train import train
 import json
-import numpy as np
 
-## ============== Part 6: Entering ratings for a new user ===============
-fp = open('my_ratings.json')
-my_ratings = json.load(fp)
-my_ratings = addNewRecommendations(my_ratings)
+name = input("Enter your name: ")
+
+user = get_user_by_name(name)
+
+if (user is None):
+    print("Oh, new user! Welcome, %s" % name)
+    ## ============== Part 6: Entering ratings for a new user ===============
+    fp = open('my_ratings.json')
+    my_ratings = json.load(fp)
+    my_ratings = addNewRecommendations(my_ratings)
+
+    # insert user to db
+    insert_user(name)
+    # insert his ratings to db
+    insert_ratings(my_ratings, name)
+else:
+    print("Welcome back, %s" % name)
 #
 # ================== Part 7: Learning Movie Ratings ====================
 #  Now, you will train the collaborative filtering model on a movie rating 
 #  dataset of 1682 movies and 943 users
 #
 
-result = train(10, my_ratings=my_ratings, maxiter=30)
+result = train(10, maxiter=30)
+# result = train(10, my_ratings=my_ratings, maxiter=30)
 
 ## ================== Part 8: Recommendation for you ====================
 #  After training the model, you can now make recommendations by computing
 #  the predictions matrix.
 #
 
-printTopRecommendations(result)
+printTopRecommendations(result, name)
 
 print('Cost function:', result.get('J'))
 print('Success!')

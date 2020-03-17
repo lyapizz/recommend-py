@@ -1,6 +1,6 @@
 import numpy as np
 
-from ml.test.loadMovieList import loadMovieList
+from db.films.load_films import loadFilmsMap
 
 
 ## ============== Part 6: Entering ratings for a new user ===============
@@ -9,9 +9,11 @@ from ml.test.loadMovieList import loadMovieList
 #  part of the code will also allow you to put in your own ratings for the
 #  movies in our dataset!
 #
+from db.users.actions import get_user_by_name
+
 
 def addNewRecommendations(my_ratings_dict):
-    movieList = loadMovieList()
+    movieList = loadFilmsMap()
     #  Initialize my ratings
     my_ratings = np.zeros(len(movieList))
     # Check the file movie_idx.txt for id of each movie in our dataset
@@ -20,7 +22,7 @@ def addNewRecommendations(my_ratings_dict):
         my_ratings[int(k)] = v
     return my_ratings
 
-def printTopRecommendations(params):
+def printTopRecommendations(params, name):
     X = params.get('X')
     Theta = params.get('Theta')
     Y = params.get('Y')
@@ -28,14 +30,16 @@ def printTopRecommendations(params):
     num_movies = Y.shape[0]
 
     p = np.dot(X, Theta.T)
-    userId = 0
+    #todo this row may be refactore
+    userId = get_user_by_name(name)["user_ID"]
+
     my_predictions = p[:, userId] + Ymean[:, 0]
-    movieList = loadMovieList()
-    print('\nTop recommendations for you:\n')
+    movieList = loadFilmsMap()
+    print('\nTop recommendations for %s :\n' % name)
     r = sorted(enumerate(my_predictions), key=lambda x: x[1], reverse=True)
     count = 10
     for item in r:
-        print('Predicting rating %.1f for movie %s' % (item[1], movieList[item[0] + 1]))
+        print('Predicting rating %.1f for movie %s' % (item[1], movieList[item[0] + 1].title))
         count = count - 1
         if count == 0:
             break
