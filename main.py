@@ -4,8 +4,8 @@ from db.users.actions import insert_user, get_user_by_name
 from ml.train import train
 import json
 
-# name = input("Enter your name: ")
-name = 'lyapizz'
+name = input("Enter your name: ")
+#name = 'lyapizz'
 
 user = get_user_by_name(name)
 
@@ -14,7 +14,6 @@ if (user is None):
     ## ============== Part 6: Entering ratings for a new user ===============
     fp = open('my_ratings.json')
     my_ratings = json.load(fp)
-    # my_ratings = addNewRecommendations(my_ratings)
 
     # insert user to db
     insert_user(name)
