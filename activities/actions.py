@@ -11,17 +11,6 @@ from db.films.load_films import loadFilmsMap
 #
 from db.users.actions import get_user_by_name
 
-
-def addNewRecommendations(my_ratings_dict):
-    movieList = loadFilmsMap()
-    #  Initialize my ratings
-    my_ratings = np.zeros(len(movieList))
-    # Check the file movie_idx.txt for id of each movie in our dataset
-    # For example, Toy Story (1995) has ID 1, so to rate it "4", you can set
-    for k,v in my_ratings_dict.items():
-        my_ratings[int(k)] = v
-    return my_ratings
-
 def printTopRecommendations(params, name):
     X = params.get('X')
     Theta = params.get('Theta')
@@ -39,7 +28,7 @@ def printTopRecommendations(params, name):
     r = sorted(enumerate(my_predictions), key=lambda x: x[1], reverse=True)
     count = 10
     for item in r:
-        print('Predicting rating %.1f for movie %s' % (item[1], movieList[item[0] + 1].title))
+        print('Predicting rating %.1f for movie %s' % (item[1], movieList[item[0] + 1]["Title"]))
         count = count - 1
         if count == 0:
             break

@@ -1,6 +1,5 @@
 import re
 
-from db.objects.film import Film
 
 def loadMovieList():
     # GETMOVIELIST reads the fixed movie list in movie.txt and returns a
@@ -12,13 +11,15 @@ def loadMovieList():
     ## Read the fixed movieulary list
     fid = open('movie_ids.txt')
 
-    movieList = dict()
+    movieList = list()
     for line in fid:
         line = line.strip()
         pieces = re.findall('([0-9]+) (.+)\(([0-9]+)\)', line)
 
         for movie in pieces:
-            film = Film(int(movie[0]), movie[1].strip(), int(movie[2]))
-            movieList[film.film_ID] = film
+            filmDict = dict()
+            filmDict['Film_ID'] = int(movie[0])
+            filmDict['Title'] = movie[1].strip()
+            filmDict['Year'] = movie[2]
+            movieList.append(filmDict)
     return movieList
-

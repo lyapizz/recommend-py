@@ -1,11 +1,21 @@
-# todo remove this file after init db
 import pymongo as pymongo
+
 from ml.test.loadMovieList import loadMovieList
 
-client = pymongo.MongoClient("mongodb://localhost:27017")
-db = client.recommend_local
-films = db.films
 
-moviesFromFile = loadMovieList()
-for v in moviesFromFile.values():
-  films.insert_one(v.__dict__)
+def getCollection():
+  client = pymongo.MongoClient("mongodb://localhost:27017")
+  db = client.recommend_local
+  return db.films
+
+def insertDefaultFilms():
+  films = getCollection()
+
+  moviesFromFile = loadMovieList()
+  for filmDict in moviesFromFile:
+    films.insert_one(filmDict)
+
+def insertFilm(data):
+  films = getCollection()
+  data['Film_ID'] = films.count_documents({})
+  films.insert_one(data)
