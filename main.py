@@ -1,11 +1,12 @@
-from activities.actions import printTopRecommendations
-from db.ratings.insert import insert_ratings
-from db.users.actions import insert_user, get_user_by_name
-from ml.train import train
 import json
 
+from activities.actions import printTopRecommendations
+from db.ratings.insert import insert_ratings
+from db.users.actions import get_user_by_name
+from ml.train import train
+
 name = input("Enter your name: ")
-#name = 'lyapizz'
+# name = 'lyapizz'
 
 user = get_user_by_name(name)
 
