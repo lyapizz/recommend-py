@@ -9,9 +9,10 @@ from .models import Choice, Question
 
 
 def home(request, **kwargs):
-    # todo check auth
-    # if request.user.is_authenticated:
-    return render(request, template_name='polls/home.html')
+    if request.user.is_authenticated:
+        return HttpResponseRedirect(reverse('polls:index'))
+    else:
+        return render(request, template_name='polls/home.html')
 
 
 # return login(request, kwargs)
@@ -20,7 +21,6 @@ def home(request, **kwargs):
 @login_required
 def profile(request):
     return render(request, template_name='polls/profile.html')
-
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
