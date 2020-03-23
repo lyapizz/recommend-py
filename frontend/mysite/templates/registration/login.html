@@ -1,15 +1,49 @@
-{% extends "polls/base.html" %}
-{% load i18n %}
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block title %}Sign in{% endblock %}
 
 {% block content %}
-    <form method="post" action=".">
-        {% csrf_token %}
-        {{ form.as_p }}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-offset-2 col-sm-10">
+                <h1>Sign in</h1>
+                <p>Not yet registered?
+                    <a href="{% url 'registration_register' %}">Register now for free!</a></p>
+                <p>Trouble signing in?
+                    <a href="{% url 'auth_password_change' %}">Reset password.</a></p>
+            </div>
+        </div>
 
-        <input type="submit" value="{% trans 'Log in' %}"/>
-        <input type="hidden" name="next" value="{{ next }}"/>
-    </form>
+        {% if form.errors %}
+            <div class="row">
+                <div class="alert alert-danger col-sm-offset-2 col-sm-6">
+                    <p><strong>Login failed. Try again...</strong></p>
+                </div>
+            </div>
+        {% endif %}
 
-    <p>{% trans "Forgot password" %}? <a href="{% url 'auth_password_reset' %}">{% trans "Reset it" %}</a>!</p>
-    <p>{% trans "Not member" %}? <a href="{% url 'registration_register' %}">{% trans "Register" %}</a>!</p>
+        <form action="{% url 'auth_login' %}"
+              method="post"
+              role="form"
+              class="form-horizontal">
+            {% csrf_token %}
+
+            {% bootstrap_field form.username layout='horizontal' %}
+            {% bootstrap_field form.password layout='horizontal' %}
+            {% if next %}
+                <input type="hidden" name="next" value="{{ next }}"/>
+            {% else %}
+                <input type="hidden" name="next" value="{% url 'polls:home' %}"/>
+            {% endif %}
+            {% buttons %}
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-primary">
+                        {% bootstrap_icon "star" %} Login
+                    </button>
+                </div>
+            {% endbuttons %}
+        </form>
+
+    </div>
 {% endblock %}

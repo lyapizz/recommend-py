@@ -1,6 +1,12 @@
-{% extends "polls/base.html" %}
-{% load i18n %}
+{% extends "base.html" %}
+{% load bootstrap3 %}
+
+{% block title %}Login{% endblock %}
 
 {% block content %}
-    <p>{% trans "Logged out" %}</p>
+    <div class="container">
+        <h1>Logout</h1>
+        <p class="lead">You are now logged out.</p>
+        <p><a href="{% url 'polls:home' %}">Home</a></p>
+    </div>
 {% endblock %}
