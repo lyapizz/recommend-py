@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% load bootstrap3 %}
-{% block title %}DEMO{% endblock %}
 {% block nav_user %}
     {% if user.is_authenticated %}
         <ul class="nav navbar-nav navbar-right">
@@ -22,8 +21,8 @@
     <div class="container">
         <div class="jumbotron">
             <div class="container">
-                <h1>DEMO</h1>
-                <p class="lead">django-registration demo using Bootstrap 3</p>
+                <h1>recommend-py</h1>
+                <p class="lead">movie recommender system</p>
                 {% if not user.is_authenticated %}
                     <p><a class="btn btn-lg btn-primary"
                           href="{% url 'registration_register' %}">Register</a>
