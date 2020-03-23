@@ -14,8 +14,9 @@ import os
 
 REGISTRATION_OPEN = True
 REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
-LOGIN_REDIRECT_URL = '/polls/'  # The page you want users to arrive at after they successful log in
+LOGIN_REDIRECT_URL = '/polls/1/'  # The page you want users to arrive at after they successful log in
 LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not logged in,
+SIMPLE_BACKEND_REDIRECT_URL = '/polls/1/'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
     'polls.apps.PollsConfig',
     'registration',
     'bootstrap3',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [
