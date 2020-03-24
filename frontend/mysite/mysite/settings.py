@@ -18,6 +18,10 @@ LOGIN_REDIRECT_URL = '/polls/1/'  # The page you want users to arrive at after t
 LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not logged in,
 SIMPLE_BACKEND_REDIRECT_URL = '/polls/1/'
 
+# star ratings params
+STAR_RATINGS_RERATE = True
+# STAR_RATINGS_RATING_MODEL = 'polls.MyRating'
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
