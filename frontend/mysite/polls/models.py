@@ -30,5 +30,6 @@ class Choice(models.Model):
     def __str__(self):
         return self.choice_text
 
-# class MyRating(AbstractBaseRating):
-#     foo = models.TextField()
+
+class MyRating(AbstractBaseRating):
+    average = models.PositiveIntegerField(default=0)
