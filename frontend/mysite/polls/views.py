@@ -1,16 +1,11 @@
-import json
-import urllib.parse
-from urllib.request import urlopen
-
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
-from pymongo.errors import DuplicateKeyError
 
-from .models import Choice, Question, Film
+from .models import Choice, Question
 
 
 def home(request, **kwargs):
@@ -70,48 +65,3 @@ def vote(request, question_id):
         # user hits the Back button.
         return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
 
-
-def importFilms(request):
-    fp = open('MoviesIds_all.txt')
-    for id in fp:
-        try:
-            existingFilm = Film.objects.get(imdbID=id)
-            print("Film exits in DB", existingFilm.Title)
-        except Film.DoesNotExist:
-            createNewFilm(id)
-    return render(request, template_name='polls/home.html')
-
-
-def createNewFilm(id):
-    urlService = "http://www.omdbapi.com/?"
-
-    params = dict()
-    params['i'] = id.strip()
-    params['apikey'] = '2f78818b'
-    url = urlService + urllib.parse.urlencode(params)
-
-    print('Retreiving url: ', url)
-
-    fp = urllib.request.urlopen(url)
-
-    data = json.load(fp)
-    if data['Response'] == "True":
-
-        if int(data['Year']) < 2000:
-            print("Film %s is too old for db" % (data["Title"]))
-            return
-
-        # insert film to db
-        try:
-            insertFilm(data)
-        except DuplicateKeyError:
-            print("Film with title '%s' already exists in db" % (data["Title"]))
-    else:
-        print("Problem with loading movie:", id)
-
-
-def insertFilm(data):
-    Film.objects.create(Title=data['Title'],
-                        Year=data['Year'],
-                        Poster=data['Poster'],
-                        imdbID=data['imdbID'])
