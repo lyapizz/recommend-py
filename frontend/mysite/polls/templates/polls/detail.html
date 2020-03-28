@@ -2,11 +2,11 @@
 {% load ratings %}
 
 {% block content %}
-    <h1>{{ question.question_text }}</h1>
+    <h1>{{ film.Title }}</h1>
 
-    <form action="{% url 'polls:vote' question.id %}" method="post">
+    <form action="{% url 'polls:vote' film.id %}" method="post">
         {% csrf_token %}
-        {% ratings question %}
+        {% ratings film %}
         <input type="submit" value="Vote">
     </form>
 {% endblock content %}

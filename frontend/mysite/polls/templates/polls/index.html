@@ -4,10 +4,10 @@
 <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
 
-{% if latest_question_list %}
+{% if latest_films_list %}
     <ul>
-        {% for question in latest_question_list %}
-            <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% for film in latest_films_list %}
+            <li><a href="{% url 'polls:detail' film.id %}">{{ film.Title }}</a></li>
         {% endfor %}
     </ul>
 {% else %}

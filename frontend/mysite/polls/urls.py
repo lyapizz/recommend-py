@@ -13,7 +13,7 @@ urlpatterns = [
     # ex: /polls/5/results/
     path('<int:pk>/results/', views.ResultsView.as_view(), name='results'),
     # ex: /polls/5/vote/
-    path('<int:question_id>/vote/', views.vote, name='vote'),
+    path('<int:film_id>/vote/', views.vote, name='vote'),
 
     path('home/', views.home, name='home'),
     path('profile/', views.profile, name='profile'),
