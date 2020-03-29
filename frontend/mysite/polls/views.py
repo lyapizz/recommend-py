@@ -4,7 +4,8 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views import generic
 
-from .models import Choice, Film
+from star_ratings.models import UserRating
+from .models import Film
 
 
 def home(request, **kwargs):
@@ -32,6 +33,7 @@ class DetailView(generic.DetailView):
     model = Film
     template_name = 'polls/detail.html'
 
+
 class ResultsView(generic.DetailView):
     model = Film
     template_name = 'polls/results.html'
@@ -40,17 +42,19 @@ class ResultsView(generic.DetailView):
 def vote(request, film_id):
     film = get_object_or_404(Film, pk=film_id)
     try:
-        selected_choice = film.choice_set.get(pk=request.POST['choice'])
-    except (KeyError, Choice.DoesNotExist):
+        user_rating = UserRating.objects.for_instance_by_user(film, user=request.user)
+        score = user_rating.score
+    except KeyError:
         # Redisplay the film voting form.
         return render(request, 'polls/detail.html', {
             'film': film,
-            'error_message': "You didn't select a choice.",
         })
     else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse('polls:results', args=(film.id,)))
+        return render(request, 'polls/results.html', {
+            'film': film,
+            'score': score,
+        })
+
+
+def top(request, **kwargs):
+    return render(request, 'polls/top.html')

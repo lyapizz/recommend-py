@@ -6,10 +6,10 @@
     <div class="container">
         <h2>{{ film.Title }}</h2>
         <img src={{ film.Poster }} class="img-responsive" alt="Responsive image">
-        <form action="{% url 'polls:vote' film.id %}" method="post">
+        {% ratings film %}
+        <form action="{% url 'polls:top' %}" method="post">
             {% csrf_token %}
-            {% ratings film %}
-            <input type="submit" value="Vote">
+            <input type="submit" value="Get Top Recommendations">
         </form>
     </div>
 {% endblock content %}

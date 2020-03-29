@@ -1,9 +1,5 @@
 <h1>{{ film.Title }}</h1>
+<h5>{{ score }}</h5>
 
-<ul>
-    {% for choice in film.choice_set.all %}
-        <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-    {% endfor %}
-</ul>
-
-<a href="{% url 'polls:detail' film.id %}">Vote again?</a>
+<a href="{% url 'polls:index' %}">Vote again?</a>
+<a href="{% url 'polls:top' %}">See Top Recommendations</a>
