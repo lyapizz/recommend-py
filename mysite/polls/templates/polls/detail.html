@@ -7,10 +7,6 @@
         <h2>{{ film.Title }}</h2>
         <img src={{ film.Poster }} class="img-responsive" alt="Responsive image">
         {% ratings film %}
-        <form action="{% url 'polls:vote' film.id %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Vote">
-        </form>
         <form action="{% url 'polls:top' %}" method="post">
             {% csrf_token %}
             <input type="submit" value="Get Top Recommendations">

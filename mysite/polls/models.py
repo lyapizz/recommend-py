@@ -1,11 +1,18 @@
 from django.db import models
 from django_registration.forms import User
 
-from star_ratings.models import AbstractBaseRating
+from star_ratings.models import AbstractBaseRating, RatingManager
 
 
-class MyRating(AbstractBaseRating):
-    average = models.PositiveIntegerField(default=0)
+class MyRatingManager(RatingManager):
+    def rate(self, instance, score, user=None, ip=None):
+        if isinstance(instance, self.model):
+            raise TypeError("Rating manager 'rate' expects model to be rated, not Rating model.")
+
+        existing_rating = Rating.objects.get_or_create(film=instance, user=user)[0]
+        existing_rating.score = score
+        existing_rating.save()
+        return existing_rating
 
 class Film(models.Model):
     Title = models.CharField(max_length=200)
@@ -39,11 +46,28 @@ class Film(models.Model):
         return self.Title
 
 
+class MyRating(AbstractBaseRating):
+    average = models.PositiveIntegerField(default=0)
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, default=1)
+
+    objects = MyRatingManager()
+
+
+# two ratings are too much
 class Rating(models.Model):
     score = models.PositiveSmallIntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     film = models.ForeignKey(Film, on_delete=models.CASCADE, default=1)
     objects = models.Manager
+
+    def to_dict(self):
+        return {
+            'score': self.score,
+            'user': self.user.id,
+            'film': self.film.id,
+        }
 
 # class GlobalRatings(models.Model):
 #     film = models.ForeignKey(Film, on_delete=models.CASCADE)
