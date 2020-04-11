@@ -5,7 +5,23 @@
 {% block content %}
     <div class="container">
         <h2>{{ film.Title }}</h2>
-        <img src={{ film.Poster }} class="img-responsive" alt="Responsive image">
+        <table>
+            <tr>
+                <td>
+                    <ul class="pager">
+                        <li class="previous"><a href="#" class="previous round">&#8249;</a></li>
+                    </ul>
+                </td>
+                <td>
+                    <img src={{ film.Poster }} class="img-responsive" alt="Responsive image">
+                </td>
+                <td>
+                    <ul class="pager">
+                        <li class="previous"><a href="#" class="next round">&#8250;</a></li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
         {% ratings film %}
         <form action="{% url 'polls:top' %}" method="post">
             {% csrf_token %}
