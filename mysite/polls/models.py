@@ -1,18 +1,27 @@
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django_registration.forms import User
 
+from star_ratings import app_settings
 from star_ratings.models import AbstractBaseRating, RatingManager
 
 
 class MyRatingManager(RatingManager):
+
     def rate(self, instance, score, user=None, ip=None):
         if isinstance(instance, self.model):
             raise TypeError("Rating manager 'rate' expects model to be rated, not Rating model.")
+        ct = ContentType.objects.get_for_model(instance)
 
-        existing_rating = Rating.objects.get_or_create(film=instance, user=user)[0]
+        existing_rating = Ratings.objects.get_or_create(film=instance, user=user)[0]
         existing_rating.score = score
+        existing_rating.content_type = ct
+        existing_rating.user = user
+        existing_rating.film = instance
+
         existing_rating.save()
         return existing_rating
+
 
 class Film(models.Model):
     Title = models.CharField(max_length=200)
@@ -47,32 +56,43 @@ class Film(models.Model):
 
 
 class MyRating(AbstractBaseRating):
+    # override to avoid decimal exception in mongo
     average = models.PositiveIntegerField(default=0)
+    count = models.PositiveIntegerField(default=1)
 
+    score = models.PositiveSmallIntegerField(default=0)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    film = models.ForeignKey(Film, on_delete=models.CASCADE, default=1)
 
     objects = MyRatingManager()
 
-
-# two ratings are too much
-class Rating(models.Model):
-    score = models.PositiveSmallIntegerField(default=0)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    film = models.ForeignKey(Film, on_delete=models.CASCADE, default=1)
-    objects = models.Manager
+    def percentage(self):
+        return (self.average / app_settings.STAR_RATINGS_RANGE) * 100
 
     def to_dict(self):
         return {
-            'score': self.score,
-            'user': self.user.id,
-            'film': self.film.id,
+            'count': self.count,
+            'total': self.total,
+            'average': self.average,
+            'percentage': self.percentage,
         }
 
-# class GlobalRatings(models.Model):
-#     film = models.ForeignKey(Film, on_delete=models.CASCADE)
-#     source = models.CharField(max_length=200)
-#     value = models.CharField(max_length=200)
-#
-#     def __str__(self):
-#         return self.film.__str__() + self.source + self.value
+
+class Ratings(models.Model):
+    score = models.PositiveSmallIntegerField(default=0)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, default=1)
+
+    objects = models.Manager
+
+    def percentage(self):
+        return (self.score / app_settings.STAR_RATINGS_RANGE) * 100
+
+    def to_dict(self):
+        return {
+            'user': self.user.id,
+            'film': self.film.id,
+            'count': 1,
+            'total': self.score,
+            'average': self.score,
+            'percentage': self.percentage()
+        }
