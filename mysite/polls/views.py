@@ -27,8 +27,7 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_films_list'
 
     def get_queryset(self):
-        """Return the last five films."""
-        return Film.objects.order_by('id')[:5]
+        return Film.objects.order_by('id')
 
 
 class DetailView(generic.DetailView):
