@@ -60,9 +60,6 @@ class MyRating(AbstractBaseRating):
     average = models.PositiveIntegerField(default=0)
     count = models.PositiveIntegerField(default=1)
 
-    score = models.PositiveSmallIntegerField(default=0)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-
     objects = MyRatingManager()
 
     def percentage(self):
