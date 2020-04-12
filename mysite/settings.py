@@ -100,7 +100,7 @@ DATABASES = {
         'ENGINE': 'djongo',
         'NAME': 'heroku_sdsg3lwz',
         'CLIENT': {
-            'HOST': 'mongodb://admin:' + DB_PASSWORD + '@ds151486.mlab.com:51486/heroku_sdsg3lwz?authSource=heroku_sdsg3lwz&retryWrites=false'
+            'host': 'mongodb://admin:' + DB_PASSWORD + '@ds151486.mlab.com:51486/heroku_sdsg3lwz?authSource=heroku_sdsg3lwz&retryWrites=false'
         }
     }
 }
