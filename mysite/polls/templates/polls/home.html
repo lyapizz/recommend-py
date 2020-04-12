@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load bootstrap3 %}
+{% block nav_user %}
+    {% if user.is_authenticated %}
+        <ul class="nav navbar-nav navbar-right">
+            <li id="nav-username"><a href="{% url 'polls:profile' %}">
+                <span class="glyphicon glyphicon-user"></span> {{ user.get_username }} &nbsp; </a>
+            </li>
+            <li>
+                <a href="{% url 'auth_logout' %}">Sign out</a>
+            </li>
+        </ul>
+    {% else %}
+        <p class="navbar-form navbar-right">
+            <a class=" btn btn-success"
+               href="{% url 'auth_login' %}">Sign in</a>
+        </p>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="jumbotron">
+            <div class="container">
+                <h1>recommend-py</h1>
+                <p class="lead">movie recommender system</p>
+                {% if not user.is_authenticated %}
+                    <p><a class="btn btn-lg btn-primary"
+                          href="{% url 'registration_register' %}">Register</a>
+                        &nbsp;
+                        <a class="btn btn-lg btn-success"
+                           href="{% url 'auth_login' %}">Sign in</a>
+                    </p>
+                {% endif %}
+            </div> <!-- /.container -->
+        </div> <!-- /.jumbotron -->
+    </div> <!-- /.container -->
+{% endblock content %}

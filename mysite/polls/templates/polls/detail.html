@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load bootstrap3 %}
+{% load ratings %}
+{% load poll_extras %}
+
+{% block content %}
+    <div class="container">
+        <h2>{{ film.Title }}</h2>
+        <table>
+            <tr>
+                <td>
+                    <ul class="pager">
+                        {% if film.id > 1 %}
+                            <li><a href="{% url 'polls:detail' film.id|add:"-1" %}" class="previous round ">&#8249;</a>
+                            </li>
+                        {% else %}
+                            <li class="disabled"><a href="#" class="previous round ">&#8249;</a></li>
+                        {% endif %}
+                    </ul>
+                </td>
+                <td>
+                    <img src={{ film.Poster }} class="img-responsive" alt="Responsive image">
+                </td>
+                <td>
+                    <ul class="pager">
+                        {% films_count as films_count %}
+                        {% if film.id < films_count %}
+                            <li><a href="{% url 'polls:detail' film.id|add:"1" %}" class="next round">&#8250;</a></li>
+                        {% else %}
+                            <li class="disabled"><a href="#" class="next round ">&#8250;</a></li>
+                        {% endif %}
+
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        {% ratings film %}
+        <form action="{% url 'polls:top' %}" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Get Top Recommendations">
+        </form>
+    </div>
+{% endblock content %}
+
+
+
