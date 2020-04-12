@@ -94,18 +94,18 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #         'HOST': 'localhost',
 #     }
 # }
-
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'heroku_sdsg3lwz',
-        'USER': 'admin',
-        'PASSWORD': DB_PASSWORD,
-        'HOST': 'ds151486.mlab.com',
-        'PORT': '51486',
+        'CLIENT': {
+            'host': 'ds151486.mlab.com',
+            'port': 51486,
+            'username': 'admin',
+            'password': DB_PASSWORD,
+        }
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
