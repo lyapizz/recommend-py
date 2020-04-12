@@ -30,6 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'n)-$p4n_dh*#rjysa!&lob3rvpfdi+4-xwsm$d5c4c+8c#u8ok')
+DB_PASSWORD = os.environ.get('DJANGO_DB_PASSWORD')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
@@ -83,15 +84,25 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'djongo',
+#         'NAME': 'recommend_local',
+#         'HOST': 'localhost',
+#     }
+# }
 
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'recommend_local',
-        'HOST': 'localhost',
+        'NAME': 'heroku_sdsg3lwz',
+        'USER': 'admin',
+        'PASSWORD': DB_PASSWORD,
+        'HOST': 'ds151486.mlab.com',
+        'PORT': '51486',
     }
 }
 
