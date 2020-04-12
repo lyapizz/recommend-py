@@ -94,17 +94,13 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #         'HOST': 'localhost',
 #     }
 # }
+
+
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'heroku_sdsg3lwz',
-        'CLIENT': {
-            'host': 'ds151486.mlab.com',
-            'port': 51486,
-            'username': 'admin',
-            'password': DB_PASSWORD,
-            'authSource': 'heroku_sdsg3lwz'
-        }
+        'HOST': 'mongodb://admin:' + DB_PASSWORD + '@ds151486.mlab.com:51486/heroku_sdsg3lwz?authSource=heroku_sdsg3lwz&retryWrites=false'
     }
 }
 
