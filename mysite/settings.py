@@ -103,8 +103,7 @@ DATABASES = {
             'port': 51486,
             'username': 'admin',
             'password': DB_PASSWORD,
-            'authSource': 'heroku_sdsg3lwz',
-            'authMechanism': 'SCRAM-SHA-1'
+            'authSource': 'heroku_sdsg3lwz'
         }
     }
 }
