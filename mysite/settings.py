@@ -37,7 +37,6 @@ DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = ['secret-fjord-62055.herokuapp.com', '127.0.0.1']
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -100,7 +99,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'djongo',
         'NAME': 'heroku_sdsg3lwz',
-        'HOST': 'mongodb://admin:' + DB_PASSWORD + '@ds151486.mlab.com:51486/heroku_sdsg3lwz?authSource=heroku_sdsg3lwz&retryWrites=false'
+        'CLIENT': {
+            'HOST': 'mongodb://admin:' + DB_PASSWORD + '@ds151486.mlab.com:51486/heroku_sdsg3lwz?authSource=heroku_sdsg3lwz&retryWrites=false'
+        }
     }
 }
 
@@ -121,7 +122,6 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
