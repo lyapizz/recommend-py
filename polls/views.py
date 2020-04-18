@@ -46,7 +46,7 @@ class ResultsView(generic.DetailView):
 def top(request, **kwargs):
     # this operation should be done in background and updated
     (Y, R) = loadRatings()
-    result = train(10, Y=Y, R=R, maxiter=30)
+    result = train(10, Y=Y, R=R, maxiter=30, minimumReviewsCount=1)
     recommendations = printTopRecommendations(result, request.user)
     return render(request, 'polls/top.html', {
         'recommendations': recommendations

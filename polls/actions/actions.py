@@ -22,7 +22,10 @@ def printTopRecommendations(params, user):
     topList = list()
     count = 10
     for item in r:
-        s = 'Predicting rating %.1f for movie %s' % (item[1], movieList[item[0] + 1].Title)
+        if item[1] < 0:
+            continue
+        movie = movieList[item[0] + 1]
+        s = 'Predicting rating %.1f for movie %s (%s)' % (item[1], movie.Title, movie.Year)
         topList.append(s)
         print(s)
         count = count - 1
