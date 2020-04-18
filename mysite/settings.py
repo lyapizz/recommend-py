@@ -30,7 +30,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'n)-$p4n_dh*#rjysa!&lob3rvpfdi+4-xwsm$d5c4c+8c#u8ok')
-DB_PASSWORD = os.environ.get('DJANGO_DB_PASSWORD')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
@@ -86,20 +85,11 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'djongo',
-#         'NAME': 'recommend_local',
-#         'HOST': 'localhost',
-#     }
-# }
-
-HOST = 'mongodb://admin:' + DB_PASSWORD + '@ds151486.mlab.com:51486/heroku_sdsg3lwz?authSource=heroku_sdsg3lwz&retryWrites=false'
-
+HOST = os.environ.get('MONGODB_URI', 'localhost')
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'heroku_sdsg3lwz',
+        'NAME': os.environ.get('MONGODB_NAME', 'recommend_local'),
         'CLIENT': {
             'host': HOST,
         }
