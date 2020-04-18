@@ -13,8 +13,9 @@ def printTopRecommendations(params, user):
     # num_movies = Y.shape[0]
 
     p = np.dot(X, Theta.T)
+    user_index = user.id - 1
 
-    my_predictions = p[:, user.id - 1] + Ymean[:, 0]
+    my_predictions = p[:, user_index] + Ymean[:, 0]
     movieList = loadFilmsMap()
     print('\nTop recommendations for %s :\n' % user.username)
     r = sorted(enumerate(my_predictions), key=lambda x: x[1], reverse=True)
@@ -22,9 +23,10 @@ def printTopRecommendations(params, user):
     topList = list()
     count = 10
     for item in r:
-        if item[1] < 0:
+        movie_index = item[0]
+        if item[1] < 0 or Y[movie_index, user_index] != 0:
             continue
-        movie = movieList[item[0] + 1]
+        movie = movieList[movie_index + 1]
         s = 'Predicting rating %.1f for movie %s (%s)' % (item[1], movie.Title, movie.Year)
         topList.append(s)
         print(s)
