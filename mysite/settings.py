@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'registration',
     'bootstrap3',
     'star_ratings',
+    'fontawesome',
 ]
 
 MIDDLEWARE = [

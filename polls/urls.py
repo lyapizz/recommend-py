@@ -12,6 +12,7 @@ urlpatterns = [
     path('<int:pk>/', views.DetailView.as_view(), name='detail'),
 
     path('home/', views.home, name='home'),
+    path('contact/', views.contact, name='contact'),
     path('top/', views.top, name='top'),
     path('profile/', views.profile, name='profile'),
 ]

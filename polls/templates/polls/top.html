@@ -1,7 +1,12 @@
+{% extends "base.html" %}
+{% load admin_urls %}
 {% load bootstrap3 %}
-<h1>Top Recommendations for you:</h1>
-<ul>
-    {% for recommendation in recommendations %}
-        <li>{{ recommendation }}</li>
-    {% endfor %}
-</ul>
+
+{% block content %}
+    <h1>Top Recommendations for you:</h1>
+    <ul>
+        {% for recommendation in recommendations %}
+            <li>{{ recommendation }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

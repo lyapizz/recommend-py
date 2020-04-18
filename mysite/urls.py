@@ -15,9 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 
+from polls import views
+
 urlpatterns = [
+    path('', login_required(views.IndexView.as_view()), name='index'),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.simple.urls')),

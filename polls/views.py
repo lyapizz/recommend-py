@@ -22,6 +22,10 @@ def profile(request):
     return render(request, template_name='polls/profile.html')
 
 
+def contact(request):
+    return render(request, template_name='polls/contact.html')
+
+
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
     context_object_name = 'latest_films_list'
