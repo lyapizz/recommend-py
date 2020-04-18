@@ -43,6 +43,8 @@ class ResultsView(generic.DetailView):
     model = Film
     template_name = 'polls/results.html'
 
+
+@login_required
 def top(request, **kwargs):
     # this operation should be done in background and updated
     (Y, R) = loadRatings()
