@@ -12,7 +12,7 @@
     {% if latest_films_list %}
         <ul>
             {% for film in latest_films_list %}
-                <li><a href="{% url 'polls:detail' film.id %}">{{ film.Title }} ( {{ film.Year }} )</a></li>
+                <li><a href="{% url 'polls:detail' film.id %}">{{ film.Title }} ({{ film.Year }})</a></li>
             {% endfor %}
         </ul>
     {% else %}
