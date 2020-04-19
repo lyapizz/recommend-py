@@ -12,11 +12,10 @@ def printTopRecommendations(params, user):
     my_predictions = prepareMyPredictions(params, user)
     ratings = sorted(enumerate(my_predictions), key=lambda x: x[1], reverse=True)
 
-    return printTopList(params, user, ratings)
+    return printTopList(params.get('Y'), user, ratings)
 
 
-def printTopList(params, user, ratings):
-    Y = params.get('Y')
+def printTopList(Y, user, ratings):
     movieDict = matrixToCollectionDict(Film)
     user_index = collectionToMatrixDict(User).get(user.id)
 
