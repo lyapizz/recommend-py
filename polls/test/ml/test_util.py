@@ -2,7 +2,7 @@ from unittest import TestCase
 
 import numpy as np
 
-from ...ml.util import filterFilmsWithoutReview
+from polls.ml.util import filterFilmsWithoutReview
 
 
 class Test(TestCase):

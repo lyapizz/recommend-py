@@ -3,7 +3,7 @@ from unittest import TestCase
 
 import numpy as np
 
-from ...ml.train import train
+from polls.ml.train import train
 
 
 class Test(TestCase):

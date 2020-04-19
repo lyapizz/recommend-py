@@ -1,6 +1,6 @@
 import pymongo as pymongo
 
-from ...ml.test.loadMovieList import loadMovieList
+from polls.test.ml import loadMovieList
 
 
 def getCollection():

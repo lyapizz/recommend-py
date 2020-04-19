@@ -2,7 +2,7 @@ from unittest import TestCase
 
 import numpy as np
 
-from ...ml.normalizeRatings import normalizeRatings
+from polls.ml.normalizeRatings import normalizeRatings
 
 
 class Test(TestCase):

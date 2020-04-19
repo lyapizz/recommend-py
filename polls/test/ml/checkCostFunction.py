@@ -1,8 +1,8 @@
 import numpy as np
 from numpy.random import rand
 
-from ...ml.computeNumericalGradient import computeNumericalGradient
-from ...ml.cost import cofiCostFuncGrad, cofiCostFuncCost
+from polls.ml.computeNumericalGradient import computeNumericalGradient
+from polls.ml.cost import cofiCostFuncGrad, cofiCostFuncCost
 
 
 def checkCostFunction(**kwargs):
