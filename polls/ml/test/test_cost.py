@@ -1,3 +1,4 @@
+import os
 from unittest import TestCase
 
 import numpy as np
@@ -11,7 +12,8 @@ class Test(TestCase):
 
     @classmethod
     def setUpClass(cls):
-        mat_contents = loadmat('resources/ex8_movies.mat')
+        my_dir = os.path.dirname(__file__)
+        mat_contents = loadmat(os.path.join(my_dir, 'resources/ex8_movies.mat'))
         #  Y is a 1682x943 matrix, containing ratings (1-5) of 1682 movies on
         #  943 users
         #
@@ -21,7 +23,7 @@ class Test(TestCase):
         #  From the matrix, we can compute statistics like average rating.
 
         (cls._Y, cls._R) = (mat_contents.get("Y"), mat_contents.get("R"))
-        mat_params = loadmat('resources/ex8_movieParams.mat')
+        mat_params = loadmat(os.path.join(my_dir, 'resources/ex8_movieParams.mat'))
         #  Reduce the data set size so that this runs faster
         cls._num_users = 4
         cls._num_movies = 5
