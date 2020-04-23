@@ -4,12 +4,9 @@ import sys
 import urllib.parse
 from urllib.request import urlopen
 
-from django.db.transaction import non_atomic_requests
-
 from polls.models import Film
 
 
-@non_atomic_requests
 def importFilmOMDB(id):
     if Film.objects.filter(imdbID=id).count() > 0:
         print("Film with title '%s' already exists in db" % (id))
