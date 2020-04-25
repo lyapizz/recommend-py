@@ -36,13 +36,21 @@ li a {
 }
 
 .margin-table {
-    margin-bottom: 15px
+    margin-bottom: 15px;
+
 }
 
 .navbar {
     margin-bottom: unset
 }
 
-.h3, h3 {
+.h3, h3,
+.td, td,
+.table, table,
+.container {
     text-align: center;
+}
+
+.td, td {
+    padding: 10px;
 }
