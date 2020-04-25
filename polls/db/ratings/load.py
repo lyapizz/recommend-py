@@ -5,7 +5,7 @@ from ...db.films.load_films import loadFilmsMap
 
 
 def loadRatings():
-    client = pymongo.MongoClient("mongodb://localhost:27017")
+    client = pymongo.MongoClient("mongodb://localhost:27018")
     db = client.recommend_local
     ratings = db.ratings
     Y = None

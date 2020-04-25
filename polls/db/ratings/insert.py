@@ -5,7 +5,7 @@ from ...db.users.actions import get_user_by_name
 
 
 def getCollection():
-    client = pymongo.MongoClient("mongodb://localhost:27017")
+    client = pymongo.MongoClient("mongodb://localhost:27018")
     db = client.recommend_local
     return db.ratings
 
