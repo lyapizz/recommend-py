@@ -35,3 +35,10 @@ li a {
     margin-right: unset;
 }
 
+.pager {
+    font-size: 20px;
+}
+
+.margin-table {
+    margin-bottom: 15px
+}
