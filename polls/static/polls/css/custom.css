@@ -1,11 +1,11 @@
 html, body {
     height: 100%;
+    min-height: 100%;
 }
 
 .wrapper {
     min-height: 100%;
     height: auto !important;
-    height: 100%;
     margin: 0 auto -100px; /* the bottom margin is the negative value of the footer's height */
 
 }
@@ -34,7 +34,7 @@ li a {
     margin-left: unset;
     margin-right: unset;
     height: 100%;
-    max-height: 100%;
+    min-height: 100%;
 }
 
 .pager {
