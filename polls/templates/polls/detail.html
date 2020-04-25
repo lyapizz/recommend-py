@@ -35,10 +35,6 @@
             </tr>
         </table>
         {% myratings film %}
-        <form action="{% url 'polls:top' %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Get Top Recommendations">
-        </form>
     </div>
 {% endblock content %}
 
