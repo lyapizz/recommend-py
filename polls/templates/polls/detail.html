@@ -5,7 +5,7 @@
 
 {% block content %}
     <div class="container">
-        <h2>{{ film.Title }} ({{ film.Year }})</h2>
+        <h3>{{ film.Title }} ({{ film.Year }})</h3>
         <table class="margin-table">
             <tr>
                 <td>
@@ -19,7 +19,8 @@
                     </ul>
                 </td>
                 <td>
-                    <img src={{ film.Poster }} class="img-responsive" alt="Responsive image">
+                    <img src={{ film.Poster }} class="img-responsive" alt="Responsive image"
+                         style="max-width: 256px">
                 </td>
                 <td>
                     <ul class="pager">
