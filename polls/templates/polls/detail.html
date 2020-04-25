@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
-{% load ratings %}
+{% load myratings %}
 {% load poll_extras %}
 
 {% block content %}
@@ -34,7 +34,7 @@
                 </td>
             </tr>
         </table>
-        {% ratings film %}
+        {% myratings film %}
         <form action="{% url 'polls:top' %}" method="post">
             {% csrf_token %}
             <input type="submit" value="Get Top Recommendations">
