@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load bootstrap3 %}
 {% load myratings %}
-{% load poll_extras %}
 
 {% block content %}
     <div class="container">
@@ -10,8 +9,8 @@
             <tr>
                 <td>
                     <ul class="pager">
-                        {% if film.id > 1 %}
-                            <li><a href="{% url 'polls:detail' film.id|add:"-1" %}" class="previous round ">&#8249;</a>
+                        {% if film.previous != -1 %}
+                            <li><a href="{% url 'polls:detail' film.previous %}" class="previous round ">&#8249;</a>
                             </li>
                         {% else %}
                             <li class="disabled"><a href="#" class="previous round ">&#8249;</a></li>
@@ -24,9 +23,8 @@
                 </td>
                 <td>
                     <ul class="pager">
-                        {% films_count as films_count %}
-                        {% if film.id < films_count %}
-                            <li><a href="{% url 'polls:detail' film.id|add:"1" %}" class="next round">&#8250;</a></li>
+                        {% if film.next != -1 %}
+                            <li><a href="{% url 'polls:detail' film.next %}" class="next round">&#8250;</a></li>
                         {% else %}
                             <li class="disabled"><a href="#" class="next round ">&#8250;</a></li>
                         {% endif %}

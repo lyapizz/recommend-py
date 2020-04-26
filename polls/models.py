@@ -51,6 +51,20 @@ class Film(models.Model):
 
     objects = models.Manager
 
+    def next(self):
+        film = Film.objects.filter(id__gt=self.id).filter(Year__lt=2021).first()
+        if film is None:
+            return -1
+        else:
+            return film.id
+
+    def previous(self):
+        film = Film.objects.filter(id__lt=self.id).filter(Year__lt=2021).first()
+        if film is None:
+            return -1
+        else:
+            return film.id
+
     def __str__(self):
         return self.Title
 

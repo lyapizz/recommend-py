@@ -31,7 +31,7 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_films_list'
 
     def get_queryset(self):
-        return Film.objects.order_by('id')
+        return Film.objects.filter(Year__lt=2021).order_by('id')
 
 
 class DetailView(generic.DetailView):
