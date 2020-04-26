@@ -1,4 +1,5 @@
 html, body {
+    text-align: center;
 }
 
 .wrapper {
@@ -48,4 +49,9 @@ li a {
 
 .td, td {
     padding: 10px;
+}
+
+.table, table {
+    margin-left: auto;
+    margin-right: auto;
 }
