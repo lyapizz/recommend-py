@@ -8,8 +8,8 @@
     <link rel="stylesheet" type="text/css" href="{% static 'polls/css/custom.css' %}">
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
-
-    {% if latest_films_list %}
+    <div style="margin-top: 5px">
+        {% if latest_films_list %}
         <ul>
             {% for film in latest_films_list %}
                 <li><a href="{% url 'polls:detail' film.id %}">{{ film.Title }} ({{ film.Year }})</a></li>
@@ -18,4 +18,5 @@
     {% else %}
         <p>No films are available.</p>
     {% endif %}
+    </div>
 {% endblock %}
