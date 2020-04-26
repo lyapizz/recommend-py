@@ -1,12 +1,13 @@
 from random import randint
-from unittest import TestCase
 
 import numpy as np
+from django.test import SimpleTestCase, override_settings
 
 from polls.ml.train import train
 
 
-class Test(TestCase):
+@override_settings(NUMBER_OF_FEATURES=2)
+class Test(SimpleTestCase):
 
     def test_train_ideal_film(self):
         # prepare
@@ -16,9 +17,9 @@ class Test(TestCase):
 
         R = np.zeros(Y.shape)
         R[Y > 0] = 1
-        #do
-        result = train(2, Y=Y, R=R)
-        #check
+        # do
+        result = train(Y=Y, R=R)
+        # check
         X = result.get('X')
         Theta = result.get('Theta')
         Ymean = result.get('Ymean')
@@ -30,17 +31,17 @@ class Test(TestCase):
         self.assertTrue(abs(my_predictions[0] - 5.) < 1e4)
 
     def test_train_two_films(self):
-        #prepare
+        # prepare
         Y = np.zeros((2, 100))
         for i in range(1, 100):
-          Y[0][i] = 5
-          Y[1][i] = 1
+            Y[0][i] = 5
+            Y[1][i] = 1
 
         R = np.zeros(Y.shape)
         R[Y > 0] = 1
-        #do
-        result = train(2, Y=Y, R=R)
-        #check
+        # do
+        result = train(Y=Y, R=R)
+        # check
         X = result.get('X')
         Theta = result.get('Theta')
         Ymean = result.get('Ymean')
@@ -53,16 +54,16 @@ class Test(TestCase):
         self.assertTrue(abs(my_predictions[1] - 1.) < 1e4)
 
     def test_train_pretty_good_film(self):
-        #prepare
+        # prepare
         Y = np.zeros((1, 100))
         for i in range(1, 100):
-          Y[0][i] = randint(4, 5)
+            Y[0][i] = randint(4, 5)
 
         R = np.zeros(Y.shape)
         R[Y > 0] = 1
-        #do
-        result = train(2, Y=Y, R=R)
-        #check
+        # do
+        result = train(Y=Y, R=R)
+        # check
         X = result.get('X')
         Theta = result.get('Theta')
         Ymean = result.get('Ymean')

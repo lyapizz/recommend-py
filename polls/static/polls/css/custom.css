@@ -55,7 +55,6 @@ li a {
     margin-right: auto;
 }
 
-.center-container, center-container {
-    display: flex;
-    justify-content: center;
+.left-aligned {
+    text-align: left;
 }

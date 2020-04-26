@@ -138,8 +138,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-# Heroku: Update database configuration from $DATABASE_URL.
-# import dj_database_url
-
-# db_from_env = dj_database_url.config(conn_max_age=500)
-# DATABASES['default'].update(db_from_env)
+# Machinge Learning constants
+MIN_REVIEWS = os.environ.get('MIN_REVIEWS', 2)  # minimal number of review of film to include it in training
+MAX_ITERATIONS = os.environ.get('MAX_ITERATIONS', 30)  # maximum iteration to decrease time of waiting
+NUMBER_OF_FEATURES = os.environ.get('NUMBER_OF_FEATURES', 10)  # num of features for training
+LAMBDA_REG = os.environ.get('LAMBDA_REG', 10)  # regularazation parameter lambda for training
