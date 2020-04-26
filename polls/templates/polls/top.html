@@ -4,9 +4,11 @@
 
 {% block content %}
     <h3>Top Recommendations for you:</h3>
-    <ul>
-        {% for recommendation in recommendations %}
-            <li>{{ recommendation }}</li>
-        {% endfor %}
-    </ul>
+    <div class="center-container">
+        <ul>
+            {% for recommendation in recommendations %}
+                <li>{{ recommendation }}</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

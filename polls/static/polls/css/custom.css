@@ -54,3 +54,8 @@ li a {
     margin-left: auto;
     margin-right: auto;
 }
+
+.center-container, center-container {
+    display: flex;
+    justify-content: center;
+}
