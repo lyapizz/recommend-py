@@ -67,3 +67,9 @@ class Test(TestCase):
         prevId = Film.objects.get(id=2).previous()
         # then
         self.assertEqual(-1, prevId, "1 has year 2021 -< skip")
+
+    def test_prev_positive_not_first(self):
+        # when
+        prevId = Film.objects.get(id=5).previous()
+        # then
+        self.assertEqual(4, prevId)

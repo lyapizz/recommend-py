@@ -52,14 +52,14 @@ class Film(models.Model):
     objects = models.Manager
 
     def next(self):
-        film = Film.objects.filter(id__gt=self.id).filter(Year__lt=2021).first()
+        film = Film.objects.filter(id__gt=self.id).filter(Year__lt=2021).order_by('id').first()
         if film is None:
             return -1
         else:
             return film.id
 
     def previous(self):
-        film = Film.objects.filter(id__lt=self.id).filter(Year__lt=2021).first()
+        film = Film.objects.filter(id__lt=self.id).filter(Year__lt=2021).order_by('-id').first()
         if film is None:
             return -1
         else:
