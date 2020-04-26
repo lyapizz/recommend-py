@@ -49,5 +49,4 @@ def train(**kwargs):
 
     J = cofiCostFuncCost(np.concatenate((X.flatten(), Theta.flatten())), Ynorm, R, num_users, num_movies,
                          settings.NUMBER_OF_FEATURES, settings.LAMBDA_REG)
-    print("J = ", J)
     return {'X': X, 'Theta': Theta, 'Y': Y, 'Ymean': Ymean, 'localMinimum': localMinimum, 'J': J}
