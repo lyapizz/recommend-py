@@ -139,7 +139,7 @@ STATIC_URL = '/static/'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Machinge Learning constants
-MIN_REVIEWS = os.environ.get('MIN_REVIEWS', 2)  # minimal number of review of film to include it in training
-MAX_ITERATIONS = os.environ.get('MAX_ITERATIONS', 30)  # maximum iteration to decrease time of waiting
-NUMBER_OF_FEATURES = os.environ.get('NUMBER_OF_FEATURES', 10)  # num of features for training
-LAMBDA_REG = os.environ.get('LAMBDA_REG', 10)  # regularazation parameter lambda for training
+MIN_REVIEWS = int(os.environ.get('MIN_REVIEWS', 2))  # minimal number of review of film to include it in training
+MAX_ITERATIONS = int(os.environ.get('MAX_ITERATIONS', 30))  # maximum iteration to decrease time of waiting
+NUMBER_OF_FEATURES = int(os.environ.get('NUMBER_OF_FEATURES', 10))  # num of features for training
+LAMBDA_REG = int(os.environ.get('LAMBDA_REG', 10))  # regularazation parameter lambda for training
