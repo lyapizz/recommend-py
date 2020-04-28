@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+from polls.middleware import SocialAuthExceptionMiddleware
+
 REGISTRATION_OPEN = True
 REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
 LOGIN_REDIRECT_URL = '/polls/1/'  # The page you want users to arrive at after they successful log in
@@ -50,7 +52,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'star_ratings',
     'fontawesome',
-    'social_django'
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -62,6 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'polls.middleware.SocialAuthExceptionMiddleware'
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -137,7 +140,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Social login params
 SOCIAL_AUTH_FACEBOOK_KEY = os.environ.get('SOCIAL_AUTH_FACEBOOK_KEY', '674368139813089')
 SOCIAL_AUTH_FACEBOOK_SECRET = os.environ.get('SOCIAL_AUTH_FACEBOOK_SECRET', 'dc1aabbe38e81e235cedf8bef31f6a5a')
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
 SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
     'fields': 'id, name, email'
 }
@@ -146,9 +149,11 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
     ('email', 'email'),
 ]
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/polls/1/'
 
 # Machinge Learning constants
 MIN_REVIEWS = int(os.environ.get('MIN_REVIEWS', 2))  # minimal number of review of film to include it in training
 MAX_ITERATIONS = int(os.environ.get('MAX_ITERATIONS', 30))  # maximum iteration to decrease time of waiting
 NUMBER_OF_FEATURES = int(os.environ.get('NUMBER_OF_FEATURES', 10))  # num of features for training
 LAMBDA_REG = int(os.environ.get('LAMBDA_REG', 10))  # regularazation parameter lambda for training
+
