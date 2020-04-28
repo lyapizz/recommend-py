@@ -6,10 +6,10 @@
 {% block content %}
     <div class="container">
         <div class="row">
-            <div class="col-sm-offset-2 col-sm-10">
+            <div class="col-sm-10">
                 <h1>Sign in</h1>
                 <p>Not yet registered?
-                    <a href="{% url 'registration_register' %}">Register now for free!</a></p>
+                    <a href="{% url 'registration_register' %}">Register now!</a></p>
                 <p>Trouble signing in?
                     <a href="{% url 'auth_password_change' %}">Reset password.</a></p>
             </div>
@@ -37,9 +37,14 @@
                 <input type="hidden" name="next" value="{% url 'polls:home' %}"/>
             {% endif %}
             {% buttons %}
-                <div class="col-sm-offset-2 col-sm-10">
+                <div class="col-sm-10">
                     <button type="submit" class="btn btn-primary">
-                        {% bootstrap_icon "star" %} Login
+                        Login
+                    </button>
+                </div>
+                <div class="col-sm-10 margin-top">
+                    <button class="btn btn-primary"><a href="{% url 'social:begin' 'facebook' %}"><i
+                            class="fa fa-facebook-square left"></i> Login with Facebook</a>
                     </button>
                 </div>
             {% endbuttons %}

@@ -12,6 +12,8 @@ from ..ml.util import filterFilmsWithoutReview
 
 
 def train(**kwargs):
+    # print("ML parameters: settings.MAX_ITERATIONS = %s , ", % (settings.MAX_ITERATIONS))
+
     if 'Y' in kwargs and 'R' in kwargs:
         Y = kwargs.get('Y')
         R = kwargs.get('R')
