@@ -21,6 +21,8 @@ python-dateutil==2.8.1
 pytz==2019.3
 scipy==1.4.1
 six==1.14.0
+social-auth-app-django==3.1.0
+social-auth-core==3.3.3
 sqlparse==0.2.4
 swapper==1.1.2.post1
 whitenoise==5.0.1
