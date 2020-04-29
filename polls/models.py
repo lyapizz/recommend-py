@@ -110,3 +110,6 @@ class Ratings(models.Model):
             'average': self.score,
             'percentage': self.percentage()
         }
+
+    def __str__(self):
+        return '{} rating {} for {}'.format(self.user, self.score, self.film)
