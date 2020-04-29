@@ -66,4 +66,5 @@ html, body {
 
 .ul, ul {
     list-style-type: none;
+    padding-inline-start: 5px;
 }
