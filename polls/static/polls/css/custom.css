@@ -63,3 +63,7 @@ html, body {
 .margin-top {
     margin-top: 15px;
 }
+
+.ul, ul {
+    list-style-type: none;
+}

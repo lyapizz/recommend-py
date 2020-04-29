@@ -10,6 +10,9 @@
                 <a href="https://www.imdb.com/title/{{ recommendation.1.imdbID }}">{{ recommendation.1.Title }}
                     ({{ recommendation.1.Year }})</a>
             </li>
+            <li>
+                <a href="{% url 'polls:detail' recommendation.1.id %}">Already seen?</a>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}
