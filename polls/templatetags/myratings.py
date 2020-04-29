@@ -6,9 +6,9 @@ from decimal import Decimal
 from django import template
 from django.template import loader
 from django.templatetags.static import static
+from star_ratings import app_settings, get_star_ratings_rating_model
 
 from polls.models import Ratings
-from star_ratings import app_settings, get_star_ratings_rating_model
 
 register = template.Library()
 
@@ -24,10 +24,13 @@ def myratings(context, item, icon_height=app_settings.STAR_RATINGS_STAR_HEIGHT,
 
     rating = get_star_ratings_rating_model().objects.for_instance(item)
 
-    user_rating = Ratings.objects.get_or_create(film=item, user=request.user)[0]
-    rating.average = user_rating.score
+    try:
+        user_rating = Ratings.objects.get(film=item, user=request.user)
+        score = user_rating.score
+    except Ratings.DoesNotExist:
+        score = 0
 
-    user_rating_percentage = 100 * (user_rating.score / Decimal(app_settings.STAR_RATINGS_RANGE))
+    rating.average = score
 
     stars = [i for i in range(1, app_settings.STAR_RATINGS_RANGE + 1)]
 
@@ -38,11 +41,9 @@ def myratings(context, item, icon_height=app_settings.STAR_RATINGS_STAR_HEIGHT,
         'rating': rating,
         'request': request,
         'user': request.user,
-        'user_rating': user_rating,
-        'user_rating_percentage': user_rating_percentage,
         'stars': stars,
         'star_count': app_settings.STAR_RATINGS_RANGE,
-        'percentage': 100 * (user_rating.score / Decimal(app_settings.STAR_RATINGS_RANGE)),
+        'percentage': 100 * (score / Decimal(app_settings.STAR_RATINGS_RANGE)),
         'icon_height': icon_height,
         'icon_width': icon_width,
         'sprite_width': icon_width * 3,
