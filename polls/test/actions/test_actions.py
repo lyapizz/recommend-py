@@ -74,7 +74,7 @@ class Test(TestCase):
         result = printTopList(Y, user, ratings)
         # expect
         expectedList = list()
-        expectedList.append('Predicting rating 5.0 for movie film5 (2020)')
-        expectedList.append('Predicting rating 2.0 for movie film2 (2020)')
-        expectedList.append('Predicting rating 1.0 for movie film1 (2020)')
+        expectedList.append((5, Film.objects.get(Title="film5")))
+        expectedList.append((2, Film.objects.get(Title="film2")))
+        expectedList.append((1, Film.objects.get(Title="film1")))
         self.assertEqual(expectedList, result)
