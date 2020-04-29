@@ -29,6 +29,7 @@ class RatingsAdmin(admin.ModelAdmin):
     stars.allow_tags = True
     stars.short_description = _('Score')
     list_display = ('__str__', 'stars')
+    ordering = ('score',)
 
 
 admin.site.register(Film, FilmAdmin)
