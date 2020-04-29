@@ -27,8 +27,8 @@ def printTopList(Y, user, ratings):
         if item[1] < 0 or Y[movie_index, user_index] != 0:
             continue
         movie = movieDict.get(movie_index)
-        s = 'Predicting rating %.1f for movie %s (%s)' % (item[1], movie.Title, movie.Year)
-        topList.append(s)
+        s = 'Predicting rating %.1f for movie %s (%s)' % (item[1], movie.Title, movie.Year)  # only for debug
+        topList.append((item[1], movie))
         print(s)
         count = count - 1
         if count == 0:

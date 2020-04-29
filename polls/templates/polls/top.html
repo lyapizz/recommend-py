@@ -6,7 +6,10 @@
     <h3 style="text-align: left">Top Recommendations for you:</h3>
     <ul>
         {% for recommendation in recommendations %}
-            <li>{{ recommendation }}</li>
+            <li>Predicting rating {{ recommendation.0|floatformat:2 }} for
+                <a href="https://www.imdb.com/title/{{ recommendation.1.imdbID }}">{{ recommendation.1.Title }}
+                    ({{ recommendation.1.Year }})</a>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}

@@ -22,10 +22,6 @@ html, body {
     text-shadow: rgb(217, 217, 217) 1px 1px 0px
 }
 
-li a {
-    color: green;
-}
-
 .social-container {
     display: flex;
     flex-direction: column;
