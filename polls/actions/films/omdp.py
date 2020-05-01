@@ -24,7 +24,7 @@ def importFilmOMDB(id):
     if data['Response'] == "True":
         # insert film to db
             obj = Film.objects.create(Year=data['Year'], Poster=data['Poster'], Title=data['Title'],
-                                      imdbID=data['imdbID'])
+                                      imdbID=data['imdbID'], imdbUrl='https://www.imdb.com/title/' + data['imdbID'])
             return obj
     else:
         print("Problem with loading movie:", id)

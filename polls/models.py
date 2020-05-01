@@ -44,7 +44,9 @@ class Film(models.Model):
     # metascore = models.CharField(max_length=200)
     # imdbRating = models.CharField(max_length=200)
     # imdbVotes = models.CharField(max_length=200)
-    imdbID = models.CharField(max_length=200, default="")
+    imdbID = models.CharField(max_length=200, default="", null=False)
+    imdbUrl = models.CharField(max_length=1000, null=False,
+                               verbose_name="IMDB url")  # my custom field to add film by imdbUrl
 
     # type = models.CharField(max_length=200)
     # DVD = models.DateTimeField

@@ -10,13 +10,13 @@ from .models import Film, Ratings
 
 class FilmAdmin(admin.ModelAdmin):
     # ...
-    fields = ('imdbID',)
+    fields = ('imdbUrl',)
     list_display = ('Title', 'Year', 'Poster', 'imdbID')
     search_fields = ['Title', 'imdbID']
 
     def save_model(self, request, obj, form, change):
-        imdbIDLink = form.cleaned_data.get('imdbID')
-        pieces = re.findall('/?(tt[0-9]+)/?', imdbIDLink)
+        imdbUrl = form.cleaned_data.get('imdbUrl')
+        pieces = re.findall('/?(tt[0-9]+)/?', imdbUrl)
         if len(pieces) > 0:
             imdbID = pieces[0]
             importFilmOMDB(imdbID)
