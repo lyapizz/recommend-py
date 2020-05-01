@@ -11,8 +11,8 @@ def loadRatings():
     Y = np.zeros((len(movies), len(users)))
 
     for rating in Ratings.objects.all():
-        curMovie = movies.get(rating.film.id)
-        curUser = users.get(rating.user.id)
+        curMovie = movies.get(rating.film_id)
+        curUser = users.get(rating.user_id)
         Y[curMovie, curUser] = rating.score
 
     R = Y != 0

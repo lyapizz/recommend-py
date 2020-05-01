@@ -93,8 +93,8 @@ class MyRating(AbstractBaseRating):
 
 class Ratings(models.Model):
     score = models.PositiveSmallIntegerField(default=0)
-    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
-    film = models.ForeignKey(Film, on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1, related_name='ratings')
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, default=1, related_name='ratings')
 
     objects = models.Manager
 
