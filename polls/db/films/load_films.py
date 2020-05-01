@@ -2,7 +2,7 @@ import pymongo as pymongo
 
 
 def loadFilmsMap():
-    client = pymongo.MongoClient("mongodb://localhost:27017")
+    client = pymongo.MongoClient("mongodb://localhost:27018")
     db = client.recommend_local
     films = db.films
 

@@ -1,3 +1,5 @@
+import re
+
 from django.contrib import admin
 from django.utils.html import format_html
 from django.utils.translation import ugettext_lazy as _
@@ -13,8 +15,11 @@ class FilmAdmin(admin.ModelAdmin):
     search_fields = ['Title', 'imdbID']
 
     def save_model(self, request, obj, form, change):
-        imdbID = form.cleaned_data.get('imdbID')
-        importFilmOMDB(imdbID)
+        imdbIDLink = form.cleaned_data.get('imdbID')
+        pieces = re.findall('/?(tt[0-9]+)/?', imdbIDLink)
+        if len(pieces) > 0:
+            imdbID = pieces[0]
+            importFilmOMDB(imdbID)
 
 
 class RatingsAdmin(admin.ModelAdmin):
