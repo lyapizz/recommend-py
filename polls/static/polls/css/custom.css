@@ -68,3 +68,31 @@ html, body {
     list-style-type: none;
     padding-inline-start: 5px;
 }
+
+
+.col-md-3 {
+    width: unset;
+}
+
+#hello {
+    display: none;
+}
+
+#hello:target {
+    display: contents;
+}
+
+#hello-window {
+    text-align: left;
+    padding: 15px;
+    border: 1px solid #000009;
+    border-radius: 10px;
+    position: absolute;
+    top: 20%;
+    margin: auto;
+    background: #fff;
+    opacity: .9;
+    width: 100%
+}
+
+

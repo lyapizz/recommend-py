@@ -3,6 +3,14 @@
 {% load myratings %}
 
 {% block content %}
+    <div id="hello">
+        <div id="hello-window">
+            <h3>How to use this app:</h3>
+            <p>1) Rate at least 5 films that you have seen</p>
+            <p>2) See new films recommendations for you in tab <b>Recommendations</b></p>
+            <button class="btn btn-success"><a href="">Got it</a></button>
+        </div>
+    </div>
     <div class="container align-center">
         <h3>{{ film.Title }} ({{ film.Year }})</h3>
         <table>

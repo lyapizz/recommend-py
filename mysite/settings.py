@@ -16,9 +16,9 @@ from polls.middleware import SocialAuthExceptionMiddleware
 
 REGISTRATION_OPEN = True
 REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
-LOGIN_REDIRECT_URL = '/polls/1/'  # The page you want users to arrive at after they successful log in
+LOGIN_REDIRECT_URL = '/polls/1/#hello'  # The page you want users to arrive at after they successful log in
 LOGIN_URL = '/accounts/login/'  # The page users are directed to if they are not logged in,
-SIMPLE_BACKEND_REDIRECT_URL = '/polls/1'
+SIMPLE_BACKEND_REDIRECT_URL = '/polls/1/#hello'
 
 # star ratings params
 STAR_RATINGS_RERATE = True
@@ -171,7 +171,7 @@ SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
     ('email', 'email'),
 ]
 SOCIAL_AUTH_USERNAME_IS_FULL_EMAIL = True
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/polls/1/'
+SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/polls/1/#hello'
 
 # Machinge Learning constants
 MIN_REVIEWS = int(os.environ.get('MIN_REVIEWS', 2))  # minimal number of review of film to include it in training
