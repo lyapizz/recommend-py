@@ -5,21 +5,12 @@ import scipy as scipy
 from django.conf import settings
 from scipy.optimize import minimize
 
-from ..db.ratings.load import loadRatings
 from ..ml.cost import cofiCostFuncCost, cofiCostFuncGrad
 from ..ml.normalizeRatings import normalizeRatings
 from ..ml.util import filterFilmsWithoutReview
 
 
-def train(**kwargs):
-    # print("ML parameters: settings.MAX_ITERATIONS = %s , ", % (settings.MAX_ITERATIONS))
-
-    if 'Y' in kwargs and 'R' in kwargs:
-        Y = kwargs.get('Y')
-        R = kwargs.get('R')
-    else:
-        (Y, R) = loadRatings()
-
+def train(Y, R):
     R = filterFilmsWithoutReview(Y, R, settings.MIN_REVIEWS)
     print('\nTraining collaborative filtering...\n')
 
