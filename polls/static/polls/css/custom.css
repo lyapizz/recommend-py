@@ -77,8 +77,7 @@ html, body {
     border: 1px solid #000009;
     border-radius: 10px;
     position: absolute;
-    top: 20%;
-    margin: auto;
+    margin-top: 1px;
     background: #fff;
     opacity: .9;
     width: 100%
