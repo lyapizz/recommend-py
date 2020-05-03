@@ -36,7 +36,7 @@ class Film(models.Model):
     # director = models.CharField(max_length=200)
     # writer = models.CharField(max_length=200)
     # actors = models.CharField(max_length=200)
-    # plot = models.CharField(max_length=200)
+    plot = models.CharField(max_length=1000, null=False)
     # language = models.CharField(max_length=200)
     # country = models.CharField(max_length=200)
     # awards = models.CharField(max_length=200)
