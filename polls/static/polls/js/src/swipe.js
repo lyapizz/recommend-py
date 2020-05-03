@@ -6,11 +6,11 @@ var mc = new Hammer(myElement);
 // listen to events...
 mc.on("panleft panright tap press", function (ev) {
     if (ev.type === "panleft") {
-        window.location.replace(location + "previous");
+        window.location.replace(location + "next");
         mc.stop()
         // djangoRemarkRest.get('http://localhost:8000/polls/2/previous',[])
     } else if (ev.type === "panright") {
-        window.location.replace(location + "next");
+        window.location.replace(location + "previous");
         mc.stop()
     }
 });
