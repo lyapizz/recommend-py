@@ -59,18 +59,12 @@
 {#    </footer>#}
 {#</div>#}
 
-<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
-{% bootstrap_javascript jquery=True %}
-<script type="text/javascript">
-    function resetHeight() {
-        // reset the body height to that of the inner browser
-        document.body.style.height = window.innerHeight + "px";
-    }
+<script src="https://hammerjs.github.io/dist/hammer.js"></script>
 
-    // reset the height whenever the window's resized
-    window.addEventListener("resize", resetHeight);
-    // called to initially set the height.
-    resetHeight();
-</script>
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
+<script type="text/javascript" src="{% static 'polls/js/src/window-resize.js' %}"></script>
+<script type="text/javascript" src="{% static 'polls/js/src/swipe.js' %}"></script>
+
+{% bootstrap_javascript jquery=True %}
 </body>
 </html>

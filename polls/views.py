@@ -38,15 +38,23 @@ class IndexView(generic.ListView):
         return Film.objects.filter(Year__lt=2021).order_by('id')
 
 
-class DetailView(generic.DetailView):
-    model = Film
-    template_name = 'polls/detail.html'
+@login_required
+def detail(request, **kwargs):
+    film = Film.objects.filter(id=kwargs['id']).get()
 
+    action = kwargs.get('action')
+    if action is None:
+        return render(request, 'polls/detail.html', {'film': film})
+    pk = None
+    if action == 'next':
+        pk = Film.next(film)
+    elif action == 'previous':
+        pk = Film.previous(film)
 
-class ResultsView(generic.DetailView):
-    model = Film
-    template_name = 'polls/results.html'
-
+    if pk is None or pk == -1:
+        print('Problem with next pk=', pk)
+        pk = film.id
+    return HttpResponseRedirect(reverse('polls:detail', args={pk}))
 
 @login_required
 def top(request, **kwargs):

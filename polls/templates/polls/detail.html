@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static from staticfiles %}
 {% load bootstrap3 %}
 {% load myratings %}
 
@@ -11,7 +12,7 @@
             <button class="btn btn-success"><a href="">Got it</a></button>
         </div>
     </div>
-    <div class="container align-center">
+    <div id="detail-container" class="container align-center">
         <h3>{{ film.Title }} ({{ film.Year }})</h3>
         <table>
             <tr>
