@@ -95,4 +95,10 @@ html, body {
     width: 100%
 }
 
+.summary-text {
+    line-height: 18px;
+    text-align: justify;
+    padding-bottom: 16px;
+}
+
 
