@@ -1,3 +1,5 @@
+import time
+
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django_registration.forms import User
@@ -57,7 +59,9 @@ class Film(models.Model):
     objects = models.Manager
 
     def next(self):
+        startTime = time.time()
         film = Film.objects.filter(id__gt=self.id).filter(Year__lt=2021).order_by('id').first()
+        print("--- %s seconds for finding nextFilm in model---" % (time.time() - startTime))
         if film is None:
             return -1
         else:

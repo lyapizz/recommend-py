@@ -8,6 +8,7 @@ from .actions.actions import printTopRecommendations
 from .actions.ratings.load import loadRatings
 from .ml.train import train
 from .models import Film
+from .utils import nextFilm, previousFilm
 
 
 def home(request, **kwargs):
@@ -40,19 +41,20 @@ class IndexView(generic.ListView):
 
 @login_required
 def detail(request, **kwargs):
-    film = Film.objects.get(id=kwargs['id'])
+    id = kwargs['id']
     action = kwargs.get('action')
     if action is None:
+        film = Film.objects.get(id=id)
         return render(request, 'polls/detail.html', {'film': film})
     pk = None
     if action == 'next':
-        pk = Film.next(film)
+        pk = nextFilm(id)
     elif action == 'previous':
-        pk = Film.previous(film)
+        pk = previousFilm(id)
 
     if pk is None or pk == -1:
         print('Problem with next pk=', pk)
-        pk = film.id
+        pk = id
     return HttpResponseRedirect(reverse('polls:detail', args={pk}))
 
 @login_required
