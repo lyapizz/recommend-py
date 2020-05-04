@@ -12,18 +12,20 @@
             <button class="btn btn-success"><a href="">Got it</a></button>
         </div>
     </div>
-    <div id="detail-container" class="container align-center">
+    <div class="container align-center">
         <h3>{{ film.Title }} ({{ film.Year }})</h3>
-        <table>
+        <table id="detail-container">
             <tr>
                 <td>
                     <ul class="pager">
-                        {% if film.previous != -1 %}
-                            <li><a href="{% url 'polls:detail' film.previous %}" class="previous round ">&#8249;</a>
-                            </li>
-                        {% else %}
-                            <li class="disabled"><a href="#" class="previous round ">&#8249;</a></li>
-                        {% endif %}
+                        {% with prevFilm=film.previous %}
+                            {% if prevFilm != -1 %}
+                                <li><a href="{% url 'polls:detail' prevFilm %}" class="previous round ">&#8249;</a>
+                                </li>
+                            {% else %}
+                                <li class="disabled"><a href="#" class="previous round ">&#8249;</a></li>
+                            {% endif %}
+                        {% endwith %}
                     </ul>
                 </td>
                 <td>
@@ -32,12 +34,13 @@
                 </td>
                 <td>
                     <ul class="pager">
-                        {% if film.next != -1 %}
-                            <li><a href="{% url 'polls:detail' film.next %}" class="next round">&#8250;</a></li>
-                        {% else %}
-                            <li class="disabled"><a href="#" class="next round ">&#8250;</a></li>
-                        {% endif %}
-
+                        {% with nextFilm=film.next %}
+                            {% if nextFilm != -1 %}
+                                <li><a href="{% url 'polls:detail' nextFilm %}" class="next round">&#8250;</a></li>
+                            {% else %}
+                                <li class="disabled"><a href="#" class="next round ">&#8250;</a></li>
+                            {% endif %}
+                        {% endwith %}
                     </ul>
                 </td>
             </tr>

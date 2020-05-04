@@ -40,8 +40,7 @@ class IndexView(generic.ListView):
 
 @login_required
 def detail(request, **kwargs):
-    film = Film.objects.filter(id=kwargs['id']).get()
-
+    film = Film.objects.get(id=kwargs['id'])
     action = kwargs.get('action')
     if action is None:
         return render(request, 'polls/detail.html', {'film': film})
