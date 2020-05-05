@@ -81,17 +81,6 @@ class MyRating(AbstractBaseRating):
 
     objects = MyRatingManager()
 
-    def percentage(self):
-        return (self.average / app_settings.STAR_RATINGS_RANGE) * 100
-
-    def to_dict(self):
-        return {
-            'count': self.count,
-            'total': self.total,
-            'average': self.average,
-            'percentage': self.percentage,
-        }
-
 
 class Ratings(models.Model):
     score = models.PositiveSmallIntegerField(default=0)
@@ -105,8 +94,8 @@ class Ratings(models.Model):
 
     def to_dict(self):
         return {
-            'user': self.user.id,
-            'film': self.film.id,
+            'user': self.user_id,
+            'film': self.film_id,
             'count': 1,
             'total': self.score,
             'average': self.score,
