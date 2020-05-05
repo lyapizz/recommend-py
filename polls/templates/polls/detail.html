@@ -2,6 +2,7 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
 {% load myratings %}
+{% load filmContent %}
 
 {% block content %}
     <div id="hello">
@@ -12,41 +13,13 @@
             <button class="btn btn-success"><a href="">Got it</a></button>
         </div>
     </div>
-    <div class="container align-center">
-        <h3>{{ film.Title }} ({{ film.Year }})</h3>
-        <table id="detail-container">
-            <tr>
-                <td>
-                    <ul class="pager">
-                        {% with prevFilm=film.previous %}
-                            {% if prevFilm != -1 %}
-                                <li><a href="{% url 'polls:detail' prevFilm %}" class="previous round ">&#8249;</a>
-                                </li>
-                            {% else %}
-                                <li class="disabled"><a href="#" class="previous round ">&#8249;</a></li>
-                            {% endif %}
-                        {% endwith %}
-                    </ul>
-                </td>
-                <td>
-                    <img src={{ film.Poster }} class="img-responsive" alt="Responsive image"
-                         style="max-height: 350px">
-                </td>
-                <td>
-                    <ul class="pager">
-                        {% with nextFilm=film.next %}
-                            {% if nextFilm != -1 %}
-                                <li><a href="{% url 'polls:detail' nextFilm %}" class="next round">&#8250;</a></li>
-                            {% else %}
-                                <li class="disabled"><a href="#" class="next round ">&#8250;</a></li>
-                            {% endif %}
-                        {% endwith %}
-                    </ul>
-                </td>
-            </tr>
-        </table>
-        {% myratings film %}
-        <div class="summary-text">{{ film.Plot }}</div>
+
+    <div id="mySwipe" class="swipe">
+        <div class="swipe-wrap">
+            {% filmContent prevFilm %}
+            {% filmContent film %}
+            {% filmContent nextFilm %}
+        </div>
     </div>
 {% endblock content %}
 

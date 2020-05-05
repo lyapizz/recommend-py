@@ -45,17 +45,19 @@ def detail(request, **kwargs):
     action = kwargs.get('action')
     if action is None:
         film = Film.objects.get(id=id)
-        return render(request, 'polls/detail.html', {'film': film})
-    pk = None
+        return render(request, 'polls/detail.html',
+                      {'film': film, 'prevFilm': previousFilm(id), 'nextFilm': nextFilm(id)})
+    filmToMove = None
     if action == 'next':
-        pk = nextFilm(id)
+        filmToMove = nextFilm(id)
     elif action == 'previous':
-        pk = previousFilm(id)
+        filmToMove = previousFilm(id)
 
-    if pk is None or pk == -1:
-        print('Problem with next pk=', pk)
-        pk = id
+    pk = id
+    if filmToMove is not None:
+        pk = filmToMove.id
     return HttpResponseRedirect(reverse('polls:detail', args={pk}))
+
 
 @login_required
 def top(request, **kwargs):
