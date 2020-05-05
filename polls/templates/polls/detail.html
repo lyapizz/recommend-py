@@ -11,14 +11,18 @@
             <button class="btn btn-success"><a href="">Got it</a></button>
         </div>
     </div>
-
-    <div id="mySwipe" class="swipe">
-        <div class="swipe-wrap">
-            {% filmContent prevFilm %}
-            {% filmContent film %}
-            {% filmContent nextFilm %}
+    {% settings_value "SWIPE_DISABLED" as swipe_disabled %}
+    {% if swipe_disabled %}
+        {% filmContent film %}
+    {% else %}
+        <div id="mySwipe" class="swipe">
+            <div class="swipe-wrap">
+                {% filmContent prevFilm %}
+                {% filmContent film %}
+                {% filmContent nextFilm %}
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock content %}
 
 

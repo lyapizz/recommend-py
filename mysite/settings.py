@@ -181,3 +181,5 @@ LAMBDA_REG = int(os.environ.get('LAMBDA_REG', 10))  # regularazation parameter l
 
 # Importing films
 OMDB_API_KEY = os.environ.get('OMDB_API_KEY')
+
+SWIPE_DISABLED = bool(os.environ.get('SWIPE_DISABLED', False))
