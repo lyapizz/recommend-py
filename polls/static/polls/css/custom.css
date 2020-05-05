@@ -106,3 +106,9 @@ html, body {
     position: relative;
 }
 
+img {
+    float: left;
+    width: 231px;
+    height: 330px;
+    background-size: cover;
+}
