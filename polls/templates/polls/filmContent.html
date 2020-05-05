@@ -6,15 +6,13 @@
             <tr>
                 <td>
                     <ul class="pager">
-                        {% with prevFilm=film.previous %}
-                            {% if prevFilm != -1 %}
-                                <li><a href="{% url 'polls:detail' prevFilm %}"
-                                       class="previous round ">&#8249;</a>
-                                </li>
-                            {% else %}
-                                <li class="disabled"><a href="#" class="previous round ">&#8249;</a></li>
-                            {% endif %}
-                        {% endwith %}
+                        {% if prevFilmId %}
+                            <li><a href="{% url 'polls:detail' prevFilmId %}"
+                                   class="previous round ">&#8249;</a>
+                            </li>
+                        {% else %}
+                            <li class="disabled"><a href="#" class="previous round ">&#8249;</a></li>
+                        {% endif %}
                     </ul>
                 </td>
                 <td>
@@ -23,14 +21,12 @@
                 </td>
                 <td>
                     <ul class="pager">
-                        {% with nextFilm=film.next %}
-                            {% if nextFilm != -1 %}
-                                <li><a href="{% url 'polls:detail' nextFilm %}" class="next round">&#8250;</a>
-                                </li>
-                            {% else %}
-                                <li class="disabled"><a href="#" class="next round ">&#8250;</a></li>
-                            {% endif %}
-                        {% endwith %}
+                        {% if nextFilmId %}
+                            <li><a href="{% url 'polls:detail' nextFilmId %}" class="next round">&#8250;</a>
+                            </li>
+                        {% else %}
+                            <li class="disabled"><a href="#" class="next round ">&#8250;</a></li>
+                        {% endif %}
                     </ul>
                 </td>
             </tr>
