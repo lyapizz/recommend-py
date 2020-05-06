@@ -98,11 +98,6 @@ class Ratings(models.Model):
 
     def to_dict(self):
         return {
-            'user': self.user_id,
-            'film': self.film_id,
-            'count': 1,
-            'total': self.score,
-            'average': self.score,
             'percentage': self.percentage()
         }
 
