@@ -16,7 +16,7 @@ class MyRatingManager(RatingManager):
             raise TypeError("Rating manager 'rate' expects model to be rated, not Rating model.")
         ct = ContentType.objects.get_for_model(instance)
 
-        existing_rating = Ratings.objects.get_or_create(film=instance, user=user)[0]
+        existing_rating = Ratings.objects.get_or_create(film_id=instance.id, user_id=user.id)[0]
         if existing_rating.score == score:
             existing_rating.score = 0
         else:
