@@ -100,6 +100,3 @@ class Ratings(models.Model):
         return {
             'percentage': self.percentage()
         }
-
-    def __str__(self):
-        return '{} rating {} for {}'.format(self.user, self.score, self.film)
