@@ -1,3 +1,5 @@
+import time
+
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django_registration.forms import User
@@ -9,6 +11,7 @@ from star_ratings.models import AbstractBaseRating, RatingManager
 class MyRatingManager(RatingManager):
 
     def rate(self, instance, score, user=None, ip=None):
+        startTime = time.time()
         if isinstance(instance, self.model):
             raise TypeError("Rating manager 'rate' expects model to be rated, not Rating model.")
         ct = ContentType.objects.get_for_model(instance)
@@ -23,6 +26,7 @@ class MyRatingManager(RatingManager):
         existing_rating.film = instance
 
         existing_rating.save()
+        print("--- %s seconds for rate() ---" % (time.time() - startTime))
         return existing_rating
 
 
