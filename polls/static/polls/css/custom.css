@@ -80,7 +80,8 @@ html, body {
     margin-top: 1px;
     background: #fff;
     opacity: .9;
-    width: 100%
+    width: 100%;
+    z-index: 10;
 }
 
 .summary-text {
