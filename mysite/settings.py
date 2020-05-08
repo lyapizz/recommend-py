@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-HOST = os.environ.get('MONGODB_URI', 'localhost:27018')
+HOST = os.environ.get('MONGOLAB_COBALT_URI', 'localhost:27018')
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
