@@ -1,7 +1,7 @@
 {% load myratings %}
 <div id="detail-container" class="container align-center">
     {% if film %}
-        <h3 class="weird-margin-bottom">{{ film.Title }} ({{ film.Year }})</h3>
+        <h4>{{ film.Title }} ({{ film.Year }})</h4>
         <div id="film-container">
             <div id="left">
                 <ul class="pager">
@@ -28,7 +28,7 @@
                 <img src={{ film.Poster }} class="img-responsive">
             </div>
         </div>
-        <div class="weird-margin-top">
+        <div>
             {% myratings film %}
         </div>
         <div class="summary-text">{{ film.Plot }}</div>
