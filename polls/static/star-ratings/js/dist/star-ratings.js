@@ -113,11 +113,17 @@
              *********************/
             function rate(url, data, sender) {
                 rest.post(url, data, function (rating) {
+                    var t0 = performance.now();
                     updateRating(rating, sender);
                     dispatchRateSuccessEvent(rating, sender);
+                    var t1 = performance.now();
+                    console.log("Call to success took " + (t1 - t0) + " milliseconds.")
                 }, function (errors) {
+                    var t0 = performance.now();
                     showError(errors, sender);
                     dispatchRateFailEvent(errors, sender);
+                    var t1 = performance.now();
+                    console.log("Call to error took " + (t1 - t0) + " milliseconds.")
                 });
             }
 
@@ -218,8 +224,6 @@
                 }
 
                 parent.querySelector(".star-ratings-rating-foreground").style.width = rating.percentage + '%';
-                var t1 = performance.now();
-                console.log("Call to updateRating took " + (t1 - t0) + " milliseconds.")
             }
 
 
