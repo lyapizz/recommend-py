@@ -90,8 +90,6 @@
              * Rating click event
              *********************/
             function ratingSubmit(ev) {
-                var t0 = performance.now();
-
                 ev.stopPropagation();
                 ev.preventDefault();
 
@@ -103,8 +101,6 @@
                 }, {});
 
                 rate(form.action, data, this);
-                var t1 = performance.now();
-                console.log("Call to ratingSubmit took " + (t1 - t0) + " milliseconds.")
             }
 
 
@@ -113,17 +109,11 @@
              *********************/
             function rate(url, data, sender) {
                 rest.post(url, data, function (rating) {
-                    var t0 = performance.now();
                     updateRating(rating, sender);
                     dispatchRateSuccessEvent(rating, sender);
-                    var t1 = performance.now();
-                    console.log("Call to success took " + (t1 - t0) + " milliseconds.")
                 }, function (errors) {
-                    var t0 = performance.now();
                     showError(errors, sender);
                     dispatchRateFailEvent(errors, sender);
-                    var t1 = performance.now();
-                    console.log("Call to error took " + (t1 - t0) + " milliseconds.")
                 });
             }
 
@@ -314,12 +304,9 @@
                 },
 
                 post: function (url, data, success, fail) {
-                    var t0 = performance.now();
                     var req = this.makeRequest(url, 'POST', success, fail);
                     req.setRequestHeader("X-CSRFToken", this.getCookie('csrftoken'));
                     req.send(JSON.stringify(data));
-                    var t1 = performance.now();
-                    console.log("Call to full post took " + (t1 - t0) + " milliseconds.")
                 },
 
                 put: function (url, data, success, fail) {
