@@ -3,6 +3,7 @@ html, body {
 
 .wrapper {
     margin: 0 auto 0px; /* the bottom margin is the negative value of the footer's height */
+    height: 100%;
 }
 
 
@@ -27,10 +28,6 @@ html, body {
     margin-right: unset;
 }
 
-.pager {
-    font-size: 20px;
-}
-
 .navbar {
     margin-bottom: unset
 }
@@ -40,9 +37,11 @@ html, body {
 }
 
 .table, table {
+    display: table;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    height: 100%;
 }
 
 .align-center {
@@ -94,11 +93,13 @@ html, body {
     overflow: hidden;
     visibility: hidden;
     position: relative;
+    height: 100%;
 }
 
 .swipe-wrap {
     overflow: hidden;
     position: relative;
+    height: 100%;
 }
 
 .swipe-wrap > div {
@@ -108,8 +109,52 @@ html, body {
 }
 
 img {
-    float: left;
-    width: 231px;
-    height: 330px;
     background-size: cover;
+    height: 100%;
+    margin: auto;
+}
+
+#detail-container {
+    height: 100%;
+}
+
+#film-container {
+    height: 65%;
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+ul#horizontal-list {
+    font-size: 25px;
+}
+
+ul#horizontal-list li {
+    display: flex;
+    align-items: center;
+}
+
+.pager {
+    margin-top: unset;
+    height: 100%;
+}
+
+#left {
+    height: 100%;
+    float: left;
+    width: 40px;
+    margin-right: 10px;
+}
+
+#middle {
+    height: 100%;
+    margin-left: 40px;
+    margin-right: 40px;
+    display: flex;
+}
+
+#right {
+    height: 100%;
+    float: right;
+    width: 40px;
+    margin-left: 10px;
 }
