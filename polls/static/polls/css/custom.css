@@ -88,6 +88,8 @@ html, body {
     text-align: justify;
     padding-bottom: 16px;
     position: absolute;
+    margin-left: 5px;
+    margin-right: 5px;
 }
 
 .swipe {
@@ -123,6 +125,7 @@ img {
 #film-container {
     margin-left: 20px;
     margin-right: 20px;
+    margin-bottom: 5px;
 }
 
 .pager {
@@ -135,7 +138,7 @@ img {
     height: 100%;
     float: left;
     width: 40px;
-    margin-right: 10px;
+    margin-right: 5px;
     display: flex;
     align-items: center;
 }
@@ -149,7 +152,7 @@ img {
     height: 100%;
     float: right;
     width: 40px;
-    margin-left: 10px;
+    margin-left: 5px;
     display: flex;
     align-items: center;
 }
