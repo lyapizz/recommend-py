@@ -121,7 +121,8 @@ img {
 
 #film-container {
     height: 65%;
-    margin: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .pager {
