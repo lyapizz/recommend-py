@@ -69,19 +69,25 @@
                 el.addEventListener("submit", ratingSubmit);
 
                 el.onmouseenter = function () {
+                    var t0 = performance.now();
                     var maxRating = getMaxRating(this);
                     var score = this.querySelector('[name=score]').value;
                     var parent = utils.findParent(this, "star-ratings");
                     parent.querySelector(".star-ratings-rating-foreground").style.width = 100 / maxRating * score + "%";
+                    var t1 = performance.now();
+                    console.log("Call to onmouseenter took " + (t1 - t0) + " milliseconds.")
                 };
 
                 el.onmouseleave = function () {
+                    var t0 = performance.now();
                     var avgRating = getAvgRating(this);
                     var maxRating = getMaxRating(this);
                     var score = this.querySelector('[name=score]').value;
                     var parent = utils.findParent(this, "star-ratings");
                     var percentage = 100 / maxRating * avgRating + "%";
                     parent.querySelector(".star-ratings-rating-foreground").style.width = percentage;
+                    var t1 = performance.now();
+                    console.log("Call to onmouseleave took " + (t1 - t0) + " milliseconds.")
                 };
             }
 
@@ -189,7 +195,6 @@
              * Update rating
              *********************/
             function updateRating(rating, sender) {
-                var t0 = performance.now();
                 var parent = utils.findParent(sender, "star-ratings"),
                     valueElem;
 
