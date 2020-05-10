@@ -144,8 +144,7 @@ img {
 }
 
 #middle {
-    height: 100%;
-    display: flex;
+    display: table-cell;
 }
 
 #right {
