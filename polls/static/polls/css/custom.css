@@ -87,6 +87,7 @@ html, body {
     line-height: 18px;
     text-align: justify;
     padding-bottom: 16px;
+    position: absolute;
 }
 
 .swipe {
@@ -120,7 +121,6 @@ img {
 }
 
 #film-container {
-    height: 65%;
     margin-left: 20px;
     margin-right: 20px;
 }
@@ -142,8 +142,6 @@ img {
 
 #middle {
     height: 100%;
-    margin-left: 40px;
-    margin-right: 40px;
     display: flex;
 }
 

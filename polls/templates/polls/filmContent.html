@@ -1,29 +1,29 @@
 {% load myratings %}
 <div id="detail-container" class="container align-center">
     {% if film %}
-        <h4>{{ film.Title }} ({{ film.Year }})</h4>
+        <div id="left">
+            <ul class="pager">
+                {% if prevFilmId %}
+                    <li id="left">
+                        <a href="{% url 'polls:detail' prevFilmId %}" class="previous round ">&#8249;</a>
+                    </li>
+                {% else %}
+                    <li id="left" class="disabled"><a href="#" class="previous round ">&#8249;</a></li>
+                {% endif %}
+            </ul>
+        </div>
+        <div id="right">
+            <ul class="pager">
+                {% if nextFilmId %}
+                    <li id="right"><a href="{% url 'polls:detail' nextFilmId %}" class="next round">&#8250;</a>
+                    </li>
+                {% else %}
+                    <li id="right" class="disabled"><a href="#" class="next round ">&#8250;</a></li>
+                {% endif %}
+            </ul>
+        </div>
         <div id="film-container">
-            <div id="left">
-                <ul class="pager">
-                    {% if prevFilmId %}
-                        <li id="left">
-                            <a href="{% url 'polls:detail' prevFilmId %}" class="previous round ">&#8249;</a>
-                        </li>
-                    {% else %}
-                        <li id="left" class="disabled"><a href="#" class="previous round ">&#8249;</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-            <div id="right">
-                <ul class="pager">
-                    {% if nextFilmId %}
-                        <li id="right"><a href="{% url 'polls:detail' nextFilmId %}" class="next round">&#8250;</a>
-                        </li>
-                    {% else %}
-                        <li id="right" class="disabled"><a href="#" class="next round ">&#8250;</a></li>
-                    {% endif %}
-                </ul>
-            </div>
+            <h3>{{ film.Title }} ({{ film.Year }})</h3>
             <div id="middle">
                 <img src={{ film.Poster }} class="img-responsive">
             </div>
