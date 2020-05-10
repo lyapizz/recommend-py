@@ -32,18 +32,6 @@ html, body {
     margin-bottom: unset
 }
 
-.td, td {
-    padding: 10px;
-}
-
-.table, table {
-    display: table;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    height: 100%;
-}
-
 .align-center {
     text-align: center;
 }
@@ -139,12 +127,12 @@ img {
     float: left;
     width: 40px;
     margin-right: 5px;
-    display: flex;
+    display: grid;
     align-items: center;
 }
 
 #middle {
-    display: table-cell;
+    display: grid;
 }
 
 #right {
@@ -152,6 +140,11 @@ img {
     float: right;
     width: 40px;
     margin-left: 5px;
-    display: flex;
+    display: grid;
     align-items: center;
+}
+
+.h1, .h2, .h3, h1, h2, h3 {
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
