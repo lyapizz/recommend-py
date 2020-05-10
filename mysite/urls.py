@@ -26,5 +26,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^accounts/', include('registration.backends.simple.urls')),
     path('social-auth/', include('social_django.urls', namespace="social")),
-    url(r'^ratings/', include('star_ratings.urls', namespace='ratings')),
+    url(r'^ratings/', include('polls.urls_stars', namespace='ratings')),
 ]
