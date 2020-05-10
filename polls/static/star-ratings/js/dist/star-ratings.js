@@ -311,9 +311,12 @@
                 },
 
                 post: function (url, data, success, fail) {
+                    var t0 = performance.now();
                     var req = this.makeRequest(url, 'POST', success, fail);
                     req.setRequestHeader("X-CSRFToken", this.getCookie('csrftoken'));
                     req.send(JSON.stringify(data));
+                    var t1 = performance.now();
+                    console.log("Call to full post took " + (t1 - t0) + " milliseconds.")
                 },
 
                 put: function (url, data, success, fail) {
