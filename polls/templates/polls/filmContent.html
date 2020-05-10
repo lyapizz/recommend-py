@@ -1,10 +1,10 @@
 {% load myratings %}
 <div id="detail-container" class="container align-center">
     {% if film %}
-        <h3>{{ film.Title }} ({{ film.Year }})</h3>
+        <h3 class="weird-margin-bottom">{{ film.Title }} ({{ film.Year }})</h3>
         <div id="film-container">
             <div id="left">
-                <ul id="horizontal-list" class="pager">
+                <ul class="pager">
                     {% if prevFilmId %}
                         <li id="left">
                             <a href="{% url 'polls:detail' prevFilmId %}" class="previous round ">&#8249;</a>
@@ -15,7 +15,7 @@
                 </ul>
             </div>
             <div id="right">
-                <ul id="horizontal-list" class="pager">
+                <ul class="pager">
                     {% if nextFilmId %}
                         <li id="right"><a href="{% url 'polls:detail' nextFilmId %}" class="next round">&#8250;</a>
                         </li>
@@ -28,7 +28,7 @@
                 <img src={{ film.Poster }} class="img-responsive">
             </div>
         </div>
-        <div>
+        <div class="weird-margin-top">
             {% myratings film %}
         </div>
         <div class="summary-text">{{ film.Plot }}</div>

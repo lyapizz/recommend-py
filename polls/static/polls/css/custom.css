@@ -112,6 +112,7 @@ img {
     background-size: cover;
     height: 100%;
     margin: auto;
+    max-height: 350px;
 }
 
 #detail-container {
@@ -120,22 +121,13 @@ img {
 
 #film-container {
     height: 65%;
-    margin-left: 20px;
-    margin-right: 20px;
-}
-
-ul#horizontal-list {
-    font-size: 25px;
-}
-
-ul#horizontal-list li {
-    display: flex;
-    align-items: center;
+    margin: -40px 20px;
 }
 
 .pager {
     margin-top: unset;
     height: 100%;
+    font-size: 25px;
 }
 
 #left {
@@ -143,6 +135,8 @@ ul#horizontal-list li {
     float: left;
     width: 40px;
     margin-right: 10px;
+    display: flex;
+    align-items: center;
 }
 
 #middle {
@@ -157,4 +151,6 @@ ul#horizontal-list li {
     float: right;
     width: 40px;
     margin-left: 10px;
+    display: flex;
+    align-items: center;
 }
