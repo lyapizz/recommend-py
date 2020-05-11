@@ -12,20 +12,18 @@ class MyRatingManager(RatingManager):
 
     def rate(self, instance, score, user=None, ip=None):
         startTime = time.time()
-        if isinstance(instance, self.model):
-            raise TypeError("Rating manager 'rate' expects model to be rated, not Rating model.")
-        ct = ContentType.objects.get_for_model(instance)
 
-        existing_rating = Ratings.objects.get_or_create(film_id=instance.id, user_id=user.id)[0]
+        existing_rating = Ratings.objects.get_or_create(film=instance, user=user)[0]
+        print("--- %s seconds after Ratings.objects.get_or_create ---" % (time.time() - startTime))
         if existing_rating.score == score:
             existing_rating.score = 0
         else:
             existing_rating.score = score
-        existing_rating.content_type = ct
-
         existing_rating.save()
-        print("--- %s seconds for rate() ---" % (time.time() - startTime))
+        print("--- %s seconds after save ---" % (time.time() - startTime))
+
         return existing_rating
+
 
 
 class Film(models.Model):
@@ -96,5 +94,6 @@ class Ratings(models.Model):
 
     def to_dict(self):
         return {
-            'percentage': self.percentage()
+            'percentage': self.percentage(),
+            'user_rating': self.score
         }

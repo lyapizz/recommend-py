@@ -11,7 +11,6 @@ from django.views import generic, View
 
 from star_ratings import get_star_ratings_rating_model, app_settings
 from star_ratings.compat import is_authenticated
-from star_ratings.forms import CreateUserRatingForm
 from .actions.actions import printTopRecommendations
 from .actions.ratings.load import loadRatings
 from .ml.train import train
@@ -102,16 +101,11 @@ class Rate(View):
             data['user'] = is_authenticated(request.user) and request.user.pk or None
 
             res_status = 200
-
             try:
-                form = CreateUserRatingForm(data=data, obj=self.get_object())
-                if form.is_valid():
-                    rating = form.save()
-                    result = rating.to_dict()
-                    result['user_rating'] = int(form.cleaned_data['score'])
-                else:
-                    result = {'errors': form.errors}
-                    res_status = 400
+                result = get_star_ratings_rating_model().objects.rate(
+                    self.get_object(),
+                    int(data['score']),
+                    user=request.user).to_dict()
             except ValidationError as err:
                 result = {'errors': err.message}
                 res_status = 400
@@ -119,7 +113,6 @@ class Rate(View):
             if request.is_ajax():
                 response = JsonResponse(data=result, status=res_status)
                 print("--- %s seconds for full rate.view ---" % (time.time() - startTime))
-
                 return response
             else:
                 return HttpResponseRedirect(return_url)
