@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.urls import include, path
+from django.views.generic import RedirectView
 
 from polls import views
 
@@ -27,4 +28,5 @@ urlpatterns = [
     url(r'^accounts/', include('registration.backends.simple.urls')),
     path('social-auth/', include('social_django.urls', namespace="social")),
     url(r'^ratings/', include('polls.urls_stars', namespace='ratings')),
+    url(r'^favicon\.ico$', RedirectView.as_view(url='/static/polls/images/favicon.ico')),
 ]
