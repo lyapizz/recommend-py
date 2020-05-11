@@ -22,8 +22,6 @@ class MyRatingManager(RatingManager):
         else:
             existing_rating.score = score
         existing_rating.content_type = ct
-        existing_rating.user = user
-        existing_rating.film = instance
 
         existing_rating.save()
         print("--- %s seconds for rate() ---" % (time.time() - startTime))
