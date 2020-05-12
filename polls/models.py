@@ -1,5 +1,3 @@
-import time
-
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django_registration.forms import User
@@ -11,17 +9,12 @@ from star_ratings.models import AbstractBaseRating, RatingManager
 class MyRatingManager(RatingManager):
 
     def rate(self, instance, score, user=None, ip=None):
-        startTime = time.time()
-
         existing_rating = Ratings.objects.get_or_create(film=instance, user=user)[0]
-        print("--- %s seconds after Ratings.objects.get_or_create ---" % (time.time() - startTime))
         if existing_rating.score == score:
             existing_rating.score = 0
         else:
             existing_rating.score = score
         existing_rating.save()
-        print("--- %s seconds after save ---" % (time.time() - startTime))
-
         return existing_rating
 
 

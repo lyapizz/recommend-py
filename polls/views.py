@@ -9,12 +9,12 @@ from django.shortcuts import render
 from django.urls import reverse
 from django.views import generic, View
 
-from star_ratings import get_star_ratings_rating_model, app_settings
+from star_ratings import get_star_ratings_rating_model
 from star_ratings.compat import is_authenticated
 from .actions.actions import printTopRecommendations
 from .actions.ratings.load import loadRatings
 from .ml.train import train
-from .models import Film
+from .models import Film, MyRating
 from .utils import nextFilm, previousFilm
 
 
@@ -91,7 +91,6 @@ class Rate(View):
         def _post(request, *args, **kwargs):
             startTime = time.time()
             data = request.POST or json.loads(request.body.decode())
-
             return_url = data.pop('next', '/')
             if 'HTTP_X_REAL_IP' in self.request.META:
                 data['ip'] = self.request.META['HTTP_X_REAL_IP']
@@ -102,22 +101,22 @@ class Rate(View):
 
             res_status = 200
             try:
-                result = get_star_ratings_rating_model().objects.rate(
-                    self.get_object(),
-                    int(data['score']),
-                    user=request.user).to_dict()
+                objects = MyRating.objects
+                print("--- %s seconds for objects ---" % (time.time() - startTime))
+                get_object = self.get_object()
+                print("--- %s seconds for get Object ---" % (time.time() - startTime))
+                result = objects.rate(get_object, int(data['score']), user=request.user).to_dict()
+                print("--- %s seconds for rate ---" % (time.time() - startTime))
             except ValidationError as err:
                 result = {'errors': err.message}
                 res_status = 400
-
             if request.is_ajax():
                 response = JsonResponse(data=result, status=res_status)
-                print("--- %s seconds for full rate.view ---" % (time.time() - startTime))
                 return response
             else:
                 return HttpResponseRedirect(return_url)
 
-        if not app_settings.STAR_RATINGS_ANONYMOUS:
-            return login_required(_post)(request, *args, **kwargs)
-
-        return _post(request, *args, **kwargs)
+        startTime = time.time()
+        result = _post(request, *args, **kwargs)
+        print("--- %s seconds for full post ---" % (time.time() - startTime))
+        return result
