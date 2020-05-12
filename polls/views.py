@@ -14,7 +14,7 @@ from star_ratings.compat import is_authenticated
 from .actions.actions import printTopRecommendations
 from .actions.ratings.load import loadRatings
 from .ml.train import train
-from .models import Film, MyRating
+from .models import Film
 from .utils import nextFilm, previousFilm
 
 
@@ -101,7 +101,7 @@ class Rate(View):
 
             res_status = 200
             try:
-                objects = MyRating.objects
+                objects = get_star_ratings_rating_model().objects
                 print("--- %s seconds for objects ---" % (time.time() - startTime))
                 get_object = self.get_object()
                 print("--- %s seconds for get Object ---" % (time.time() - startTime))
