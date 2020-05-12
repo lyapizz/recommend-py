@@ -64,7 +64,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'polls.middleware.SocialAuthExceptionMiddleware'
+    'polls.middleware.SocialAuthExceptionMiddleware',
+    "compression_middleware.middleware.CompressionMiddleware",
 ]
 
 ROOT_URLCONF = 'mysite.urls'

@@ -81,7 +81,6 @@ class Rate(View):
 
     def post(self, request, *args, **kwargs):
         def _post(request, *args, **kwargs):
-            startTime = time.time()
             data = request.POST or json.loads(request.body.decode())
             return_url = data.pop('next', '/')
             if 'HTTP_X_REAL_IP' in self.request.META:
@@ -94,9 +93,7 @@ class Rate(View):
             res_status = 200
             try:
                 get_object = Film.objects.get(pk=self.kwargs.get('object_id'))
-                print("--- %s seconds for get Object ---" % (time.time() - startTime))
                 result = rate(get_object, int(data['score']), user=request.user).to_dict()
-                print("--- %s seconds for rate ---" % (time.time() - startTime))
             except ValidationError as err:
                 result = {'errors': err.message}
                 res_status = 400
