@@ -2,7 +2,6 @@ import json
 import time
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.contenttypes.models import ContentType
 from django.core.exceptions import ValidationError
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render
@@ -14,7 +13,7 @@ from star_ratings.compat import is_authenticated
 from .actions.actions import printTopRecommendations
 from .actions.ratings.load import loadRatings
 from .ml.train import train
-from .models import Film
+from .models import Film, Ratings
 from .utils import nextFilm, previousFilm
 
 
@@ -80,13 +79,6 @@ def top(request, **kwargs):
 class Rate(View):
     model = get_star_ratings_rating_model()
 
-    def get_object(self):
-        """
-        Returns the model instance we're rating from the URL params.
-        """
-        content_type = ContentType.objects.get_for_id(self.kwargs.get('content_type_id'))
-        return content_type.get_object_for_this_type(pk=self.kwargs.get('object_id'))
-
     def post(self, request, *args, **kwargs):
         def _post(request, *args, **kwargs):
             startTime = time.time()
@@ -101,11 +93,9 @@ class Rate(View):
 
             res_status = 200
             try:
-                objects = get_star_ratings_rating_model().objects
-                print("--- %s seconds for objects ---" % (time.time() - startTime))
-                get_object = self.get_object()
+                get_object = Film.objects.get(pk=self.kwargs.get('object_id'))
                 print("--- %s seconds for get Object ---" % (time.time() - startTime))
-                result = objects.rate(get_object, int(data['score']), user=request.user).to_dict()
+                result = rate(get_object, int(data['score']), user=request.user).to_dict()
                 print("--- %s seconds for rate ---" % (time.time() - startTime))
             except ValidationError as err:
                 result = {'errors': err.message}
@@ -115,6 +105,15 @@ class Rate(View):
                 return response
             else:
                 return HttpResponseRedirect(return_url)
+
+        def rate(instance, score, user=None):
+            existing_rating = Ratings.objects.get_or_create(film=instance, user=user)[0]
+            if existing_rating.score == score:
+                existing_rating.score = 0
+            else:
+                existing_rating.score = score
+            existing_rating.save()
+            return existing_rating
 
         startTime = time.time()
         result = _post(request, *args, **kwargs)
