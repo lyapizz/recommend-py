@@ -12,8 +12,6 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
-from polls.middleware import SocialAuthExceptionMiddleware
-
 REGISTRATION_OPEN = True
 REGISTRATION_AUTO_LOGIN = True  # If True, the user will be automatically logged in.
 LOGIN_REDIRECT_URL = '/polls/1/#hello'  # The page you want users to arrive at after they successful log in
@@ -37,7 +35,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'n)-$p4n_dh*#rjysa!&lob3rvpfdi+
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
 
 ALLOWED_HOSTS = ['secret-fjord-62055.herokuapp.com', '127.0.0.1', 'localhost', 'omdbapi.com', '192.168.0.105']
-
+INTERNAL_IPS = ('secret-fjord-62055.herokuapp.com', '127.0.0.1',)
 # Application definition
 
 INSTALLED_APPS = [
@@ -47,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'debug_toolbar',
     'polls.apps.PollsConfig',
     'registration',
     'bootstrap3',
@@ -57,6 +56,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',

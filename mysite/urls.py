@@ -19,6 +19,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.views.generic import RedirectView
 
+from mysite import settings
 from polls import views
 
 urlpatterns = [
@@ -30,3 +31,14 @@ urlpatterns = [
     url(r'^ratings/', include('polls.urls_stars', namespace='ratings')),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/polls/images/favicon.ico')),
 ]
+
+if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [
+                      path('__debug__/', include(debug_toolbar.urls)),
+
+                      # For django versions before 2.0:
+                      # url(r'^__debug__/', include(debug_toolbar.urls)),
+
+                  ] + urlpatterns
