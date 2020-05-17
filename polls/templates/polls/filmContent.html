@@ -5,20 +5,20 @@
             <ul class="pager">
                 {% if prevFilmId %}
                     <li id="left">
-                        <a href="{% url 'polls:detail' prevFilmId %}" class="previous round ">&#8249;</a>
+                        <a href="{% url 'polls:detail' prevFilmId %}" class="previous round front">&#8249;</a>
                     </li>
                 {% else %}
-                    <li id="left" class="disabled"><a href="#" class="previous round ">&#8249;</a></li>
+                    <li id="left" class="disabled"><a href="#" class="previous round front">&#8249;</a></li>
                 {% endif %}
             </ul>
         </div>
         <div id="right">
             <ul class="pager">
                 {% if nextFilmId %}
-                    <li id="right"><a href="{% url 'polls:detail' nextFilmId %}" class="next round">&#8250;</a>
+                    <li id="right"><a href="{% url 'polls:detail' nextFilmId %}" class="next round front">&#8250;</a>
                     </li>
                 {% else %}
-                    <li id="right" class="disabled"><a href="#" class="next round ">&#8250;</a></li>
+                    <li id="right" class="disabled"><a href="#" class="next round front">&#8250;</a></li>
                 {% endif %}
             </ul>
         </div>
