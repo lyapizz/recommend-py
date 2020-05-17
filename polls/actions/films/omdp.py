@@ -15,7 +15,9 @@ def importFilmOMDB(id):
     if data:
         # insert film to db
         obj = Film.objects.create(Year=data['Year'], Poster=data['Poster'], Title=data['Title'],
-                                  imdbID=data['imdbID'], imdbUrl='https://www.imdb.com/title/' + data['imdbID'],
+                                  imdbID=data['imdbID'],
+                                  genre=data['Genre'],
+                                  imdbUrl='https://www.imdb.com/title/' + data['imdbID'],
                                   Plot=data['Plot'])
         return obj
     else:
