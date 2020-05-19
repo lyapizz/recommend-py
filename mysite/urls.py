@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.views.generic import RedirectView
+from django_registration.forms import RegistrationFormUniqueEmail
+from django_registration.views import RegistrationView
 
 from polls import views
 
@@ -25,8 +27,12 @@ urlpatterns = [
     path('', login_required(views.IndexView.as_view()), name='index'),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
-    url(r'^accounts/', include('registration.backends.simple.urls')),
     path('social-auth/', include('social_django.urls', namespace="social")),
     url(r'^ratings/', include('polls.urls_stars', namespace='ratings')),
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/polls/images/favicon.ico')),
+    url(r'^accounts/register/$',
+        RegistrationView.as_view(form_class=RegistrationFormUniqueEmail,
+                                 template_name='registration/registration_form.html'),
+        name='registration_register'),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
 ]
