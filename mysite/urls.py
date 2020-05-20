@@ -18,9 +18,10 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.views.generic import RedirectView
+from registration.backends.simple.views import RegistrationView
 from registration.forms import RegistrationFormUniqueEmail
-from registration.views import RegistrationView
 
+from mysite.settings import LOGIN_REDIRECT_URL
 from polls import views
 
 urlpatterns = [
@@ -32,7 +33,8 @@ urlpatterns = [
     url(r'^favicon\.ico$', RedirectView.as_view(url='/static/polls/images/favicon.ico')),
     url(r'^accounts/register/$',
         RegistrationView.as_view(form_class=RegistrationFormUniqueEmail,
-                                 template_name='registration/registration_form.html'),
+                                 template_name='registration/registration_form.html',
+                                 success_url=LOGIN_REDIRECT_URL),
         name='registration_register'),
     url(r'^accounts/', include('registration.backends.simple.urls')),
 ]
