@@ -18,8 +18,8 @@ from django.contrib import admin
 from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.views.generic import RedirectView
-from django_registration.forms import RegistrationFormUniqueEmail
-from django_registration.views import RegistrationView
+from registration.forms import RegistrationFormUniqueEmail
+from registration.views import RegistrationView
 
 from polls import views
 
