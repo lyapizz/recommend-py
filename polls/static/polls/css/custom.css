@@ -144,12 +144,11 @@ img {
 
 .middle {
     display: grid;
-    float: left;
 }
 
 .right {
     height: 100%;
-    float: left;
+    float: right;
     width: 40px;
     margin-left: 5px;
     display: grid;
