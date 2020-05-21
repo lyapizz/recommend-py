@@ -140,7 +140,6 @@ img {
     margin-right: 5px;
     display: grid;
     align-items: center;
-    background-color: red;
 }
 
 .middle {
@@ -155,7 +154,6 @@ img {
     margin-left: 5px;
     display: grid;
     align-items: center;
-    background-color: green;
 }
 
 .front {
