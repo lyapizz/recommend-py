@@ -75,9 +75,15 @@ html, body {
     line-height: 18px;
     text-align: justify;
     padding-bottom: 16px;
-    position: absolute;
     margin-left: 5px;
     margin-right: 5px;
+}
+
+.genre {
+    line-height: 36px;
+    margin-left: 5px;
+    margin-right: 5px;
+    text-align: left;
 }
 
 .swipe {
@@ -112,40 +118,54 @@ img {
 }
 
 #film-container {
-    margin-left: 20px;
-    margin-right: 20px;
+    height: 50%;
+    /*margin-left: 20px;*/
+    /*margin-right: 20px;*/
 }
 
 .pager {
-    margin-top: unset;
+    /*margin-top: unset;*/
     height: 100%;
     font-size: 25px;
 }
 
-#left {
-    height: 80%;
+.pager li {
+    display: grid;
+}
+
+.left {
+    height: 100%;
     float: left;
     width: 40px;
     margin-right: 5px;
     display: grid;
     align-items: center;
+    background-color: red;
 }
 
-#middle {
+.middle {
     display: grid;
+    float: left;
 }
 
-#right {
-    height: 80%;
-    float: right;
+.right {
+    height: 100%;
+    float: left;
     width: 40px;
     margin-left: 5px;
     display: grid;
     align-items: center;
+    background-color: green;
 }
 
 .front {
     z-index: 10;
+}
+
+.center {
+    bottom: 50%;
+    transform: translate(50%, 0%);
+    position: absolute;
 }
 
 .h1, .h2, .h3, h1, h2, h3 {

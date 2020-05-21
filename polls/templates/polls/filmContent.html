@@ -1,36 +1,39 @@
 {% load myratings %}
 <div id="detail-container" class="container align-center">
     {% if film %}
-        <div id="left">
-            <ul class="pager">
-                {% if prevFilmId %}
-                    <li id="left">
-                        <a href="{% url 'polls:detail' prevFilmId %}" class="previous round front">&#8249;</a>
-                    </li>
-                {% else %}
-                    <li id="left" class="disabled"><a href="#" class="previous round front">&#8249;</a></li>
-                {% endif %}
-            </ul>
-        </div>
-        <div id="right">
-            <ul class="pager">
-                {% if nextFilmId %}
-                    <li id="right"><a href="{% url 'polls:detail' nextFilmId %}" class="next round front">&#8250;</a>
-                    </li>
-                {% else %}
-                    <li id="right" class="disabled"><a href="#" class="next round front">&#8250;</a></li>
-                {% endif %}
-            </ul>
-        </div>
         <h3>{{ film.Title }} ({{ film.Year }})</h3>
+
         <div id="film-container">
-            <div id="middle">
+            <div class="left">
+                <ul class="pager">
+                    {% if prevFilmId %}
+                        <li class="left">
+                            <a href="{% url 'polls:detail' prevFilmId %}" class="previous round front">&#8249;</a>
+                        </li>
+                    {% else %}
+                        <li class="left disabled"><a href="#" class="previous round front">&#8249;</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="right">
+                <ul class="pager">
+                    {% if nextFilmId %}
+                        <li class="right"><a href="{% url 'polls:detail' nextFilmId %}"
+                                             class="next round front">&#8250;</a>
+                        </li>
+                    {% else %}
+                        <li class="right disabled"><a href="#" class="next round front">&#8250;</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+            <div class="middle">
                 <img src={{ film.Poster }} class="img-responsive">
             </div>
         </div>
         <div>
             {% myratings film %}
         </div>
+        <div class="genre">Genre: {{ film.genre }}</div>
         <div class="summary-text">{{ film.Plot }}</div>
     {% else %}
         <h3/>
