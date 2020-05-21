@@ -118,7 +118,7 @@ img {
 }
 
 #film-container {
-    height: 50%;
+    height: fit-content;
     /*margin-left: 20px;*/
     /*margin-right: 20px;*/
 }
@@ -138,6 +138,7 @@ img {
     float: left;
     width: 40px;
     margin-right: 5px;
+    margin-top: 30%;
     display: grid;
     align-items: center;
 }
@@ -151,6 +152,7 @@ img {
     float: right;
     width: 40px;
     margin-left: 5px;
+    margin-top: 30%;
     display: grid;
     align-items: center;
 }
