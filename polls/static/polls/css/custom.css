@@ -114,7 +114,7 @@ img {
 
 #detail-container {
     height: 100%;
-    overflow: scroll;
+    max-width: 568px;
 }
 
 #film-container {
@@ -124,7 +124,7 @@ img {
 }
 
 .pager {
-    /*margin-top: unset;*/
+    margin-top: unset;
     height: 100%;
     font-size: 25px;
 }
