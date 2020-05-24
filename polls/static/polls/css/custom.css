@@ -138,7 +138,6 @@ img {
     float: left;
     width: 40px;
     margin-right: 5px;
-    margin-top: 40%;
     display: grid;
     align-items: center;
 }
@@ -152,9 +151,12 @@ img {
     float: right;
     width: 40px;
     margin-left: 5px;
-    margin-top: 40%;
     display: grid;
     align-items: center;
+}
+
+.shift-down {
+    margin-top: 40%;
 }
 
 .front {

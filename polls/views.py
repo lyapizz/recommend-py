@@ -39,6 +39,7 @@ def about(request):
 
 class IndexView(generic.ListView):
     template_name = 'polls/index.html'
+    paginate_by = 25
     context_object_name = 'latest_films_list'
 
     def get_queryset(self):

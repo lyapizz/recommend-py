@@ -5,18 +5,41 @@
 {% load static %}
 
 {% block content %}
-    <link rel="stylesheet" type="text/css" href="{% static 'polls/css/custom.css' %}">
-    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
-    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
     <div style="margin-top: 5px">
-        {% if latest_films_list %}
-        <ul>
-            {% for film in latest_films_list %}
-                <li><a href="{% url 'polls:detail' film.id %}">{{ film.Title }} ({{ film.Year }})</a></li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>No films are available.</p>
-    {% endif %}
+        <div id="al-container">
+            {#            <div id="al-control">#}
+            {#                <h3 class="ad-mh">Account List#}
+            {# Add Account Link #}
+            {#                </h3>#}
+            {# Account Search Form #}
+            {#            </div>#}
+            <ul id="al-group">
+                {% for film in latest_films_list %}
+                    <li><a href="{% url 'polls:detail' film.id %}">{{ film.Title }} ({{ film.Year }})</a></li>
+                {% endfor %}
+            </ul>
+            {#Pagination Section#}
+            {% if is_paginated %}
+                <div id="al-paginate">
+                    <ul class="pager">
+                        {% if page_obj.has_previous %}
+                            <li class="left">
+                                <a href="{% url 'polls:index' %}?page={{ page_obj.previous_page_number }}"
+                                   class="previous round front">&#8249;</a>
+                            </li>
+                        {% endif %}
+                        {% if page_obj.has_next %}
+                            <li class="right">
+                                <a href="{% url 'polls:index' %}?page={{ page_obj.next_page_number }}"
+                                   class="next round front">&#8250;</a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </div>
+            {% endif %}
+        </div>
     </div>
+
+
 {% endblock %}
