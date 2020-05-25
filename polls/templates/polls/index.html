@@ -6,14 +6,17 @@
 
 {% block content %}
 
-    <div style="margin-top: 5px">
+    <div class="mg-5">
         <div id="al-container">
-            {#            <div id="al-control">#}
-            {#                <h3 class="ad-mh">Account List#}
-            {# Add Account Link #}
-            {#                </h3>#}
-            {# Account Search Form #}
-            {#            </div>#}
+
+            <div class="form-group has-feedback has-search">
+                <form action="{% url 'polls:index' %}" method="get" role="form" class="form-horizontal">
+                    <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                    <input type="text" class="form-control" placeholder="Search" name="film"
+                           value="{{ request.GET.film }}">
+                </form>
+            </div>
+
             <ul id="al-group">
                 {% for film in latest_films_list %}
                     <li><a href="{% url 'polls:detail' film.id %}">{{ film.Title }} ({{ film.Year }})</a></li>

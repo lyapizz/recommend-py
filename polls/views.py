@@ -43,8 +43,18 @@ class IndexView(generic.ListView):
     context_object_name = 'latest_films_list'
 
     def get_queryset(self):
-        return Film.objects.filter(Year__lt=2021).order_by('id')
+        try:
+            film = self.request.GET.get('film', )
+        except KeyError:
+            film = None
+        if film:
+            latest_films_list = Film.objects.filter(Title__icontains=film).filter(Year__lt=2021).order_by('id')
+        else:
+            latest_films_list = Film.objects.filter(Year__lt=2021).order_by('id')
+        return latest_films_list
 
+    def dispatch(self, *args, **kwargs):
+        return super(IndexView, self).dispatch(*args, **kwargs)
 
 @login_required
 def detail(request, **kwargs):

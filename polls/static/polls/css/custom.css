@@ -169,6 +169,11 @@ img {
     position: absolute;
 }
 
+.mg-5 {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 .h1, .h2, .h3, h1, h2, h3 {
     margin-top: 5px;
     margin-bottom: 5px;
