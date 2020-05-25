@@ -12,7 +12,7 @@
             <div class="form-group has-feedback has-search">
                 <form action="{% url 'polls:index' %}" method="get" role="form" class="form-horizontal">
                     <span class="glyphicon glyphicon-search form-control-feedback"></span>
-                    <input type="text" class="form-control" placeholder="Search" name="film"
+                    <input type="search" class="form-control" placeholder="Search" name="film"
                            value="{{ request.GET.film }}">
                 </form>
             </div>
