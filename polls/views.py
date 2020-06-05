@@ -79,7 +79,7 @@ def top(request, **kwargs):
     # this operation should be done in background and updated
     (Y, R) = loadRatings()
     result = train(Y, R)
-    recommendations = printTopRecommendations(result, request.user)
+    recommendations = printTopRecommendations(result, request)
     return render(request, 'polls/top.html', {
         'recommendations': recommendations
     })

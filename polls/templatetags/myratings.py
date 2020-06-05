@@ -23,13 +23,6 @@ def myratings(context, item, icon_height=app_settings.STAR_RATINGS_STAR_HEIGHT,
             'Make sure you have "django.core.context_processors.request" in your templates context processor list')
 
     rating = get_star_ratings_rating_model().objects.for_instance(item)
-    # user = request.user
-    # if not request.user.is_authenticated:
-    #     users = User.objects.all()
-    #     # might be possible model has no records so make sure to handle None
-    #     next_id = users.aggregate(Max('id'))['id__max'] + 1 if users else 1
-    #     user = User.objects.create(username="user_"+str(next_id))
-    #     request.user = user
     try:
         if request.user.is_authenticated:
             user_rating = Ratings.objects.get(film=item, user=request.user)
