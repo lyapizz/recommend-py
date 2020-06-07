@@ -172,6 +172,7 @@ img {
 .mg-5 {
     margin-top: 5px;
     margin-bottom: 5px;
+    margin-left: 5px;
 }
 
 .form-group {
@@ -181,4 +182,9 @@ img {
 .h1, .h2, .h3, h1, h2, h3 {
     margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.optional_sign_in {
+    margin-top: 10px;
+    font-size: 18px;
 }
