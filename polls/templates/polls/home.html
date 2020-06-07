@@ -2,7 +2,7 @@
 {% load bootstrap3 %}
 {% block nav_user %}
     {% if user.is_authenticated %}
-        <ul class="nav navbar-nav navbar-right">
+        <ul class="nav navbar-nav">
             <li id="nav-username"><a href="{% url 'polls:profile' %}">
                 <span class="glyphicon glyphicon-user"></span> {{ user.get_username }} &nbsp; </a>
             </li>
@@ -11,7 +11,7 @@
             </li>
         </ul>
     {% else %}
-        <p class="navbar-form navbar-right">
+        <p class="navbar-form">
             <a class=" btn btn-success"
                href="{% url 'auth_login' %}">Sign in</a>
         </p>
@@ -21,8 +21,7 @@
     <div class="container">
         <div class="jumbotron">
             <div class="container">
-                <h1>recommend-py</h1>
-                <p class="lead">movie recommender system</p>
+                <p class="lead">Movie Recommendation System</p>
                 {% if not user.is_authenticated %}
                     <p><a class="btn btn-lg btn-primary"
                           href="{% url 'registration_register' %}">Register</a>

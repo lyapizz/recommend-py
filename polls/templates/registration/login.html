@@ -26,7 +26,7 @@
         <form action="{% url 'auth_login' %}"
               method="post"
               role="form"
-              class="form-horizontal">
+              class="form-horizontal width_limiter">
             {% csrf_token %}
 
             {% bootstrap_field form.username layout='horizontal' %}

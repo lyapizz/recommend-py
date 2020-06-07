@@ -26,6 +26,7 @@ html, body {
 .container {
     margin-left: unset;
     margin-right: unset;
+    width_limiter
 }
 
 .navbar {
@@ -188,6 +189,6 @@ img {
     font-size: 18px;
 }
 
-.width_limiter {
+.width_limiter, .container {
     max-width: 568px;
 }

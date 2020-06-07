@@ -14,7 +14,7 @@
         </div>
 
         <form action="{% url 'registration_register' %}"
-              method="post" role="form" class="form-horizontal">
+              method="post" role="form" class="form-horizontal width_limiter">
             {% csrf_token %}
             {% bootstrap_form form layout='horizontal' %}
 
