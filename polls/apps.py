@@ -5,4 +5,5 @@ class PollsConfig(AppConfig):
     name = 'polls'
 
     def ready(self):
-        pass
+        # don't optimize imports here
+        import polls.signals
