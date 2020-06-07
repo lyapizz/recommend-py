@@ -5,5 +5,5 @@ class PollsConfig(AppConfig):
     name = 'polls'
 
     def ready(self):
-        # don't optimize imports here
+        # noinspection PyUnresolvedReferences
         import polls.signals
