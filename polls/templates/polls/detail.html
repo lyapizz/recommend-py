@@ -3,6 +3,7 @@
 {% load filmContent %}
 
 {% block content %}
+    {% if not user.is_authenticated %}
     <div id="hello">
         <div id="hello-window" class="width_limiter">
             <h3>How to use this app:</h3>
@@ -11,6 +12,7 @@
             <button class="btn btn-success"><a href="">Got it</a></button>
         </div>
     </div>
+    {% endif %}
     {% settings_value "SWIPE_DISABLED" as swipe_disabled %}
     {% if swipe_disabled %}
         {% filmContent film %}
