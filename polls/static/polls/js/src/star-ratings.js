@@ -67,22 +67,6 @@
              *********************/
             function bindRatings(el) {
                 el.addEventListener("submit", ratingSubmit);
-
-                el.onmouseenter = function () {
-                    var maxRating = getMaxRating(this);
-                    var score = this.querySelector('[name=score]').value;
-                    var parent = utils.findParent(this, "star-ratings");
-                    parent.querySelector(".star-ratings-rating-foreground").style.width = 100 / maxRating * score + "%";
-                };
-
-                el.onmouseleave = function () {
-                    var avgRating = getAvgRating(this);
-                    var maxRating = getMaxRating(this);
-                    var score = this.querySelector('[name=score]').value;
-                    var parent = utils.findParent(this, "star-ratings");
-                    var percentage = 100 / maxRating * avgRating + "%";
-                    parent.querySelector(".star-ratings-rating-foreground").style.width = percentage;
-                };
             }
 
 
@@ -159,16 +143,6 @@
                 var parent = utils.findParent(el, "star-ratings");
                 if (parent) {
                     return parseInt(parent.getAttribute('data-max-rating'));
-                }
-
-                return -1;
-            }
-
-
-            function getAvgRating(el) {
-                var parent = utils.findParent(el, "star-ratings");
-                if (parent) {
-                    return parseFloat(parent.getAttribute('data-avg-rating'));
                 }
 
                 return -1;
