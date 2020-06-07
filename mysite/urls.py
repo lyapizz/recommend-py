@@ -21,10 +21,9 @@ from registration.backends.simple.views import RegistrationView
 from registration.forms import RegistrationFormUniqueEmail
 
 from mysite.settings import LOGIN_REDIRECT_URL
-from polls import views
 
 urlpatterns = [
-    path('', views.IndexView.as_view(), name='index'),
+    path('', RedirectView.as_view(url='/polls/1/#hello')),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
     path('social-auth/', include('social_django.urls', namespace="social")),
