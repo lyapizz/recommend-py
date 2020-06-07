@@ -15,7 +15,6 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.views.generic import RedirectView
 from registration.backends.simple.views import RegistrationView
@@ -25,7 +24,7 @@ from mysite.settings import LOGIN_REDIRECT_URL
 from polls import views
 
 urlpatterns = [
-    path('', login_required(views.IndexView.as_view()), name='index'),
+    path('', views.IndexView.as_view(), name='index'),
     path('polls/', include('polls.urls')),
     path('admin/', admin.site.urls),
     path('social-auth/', include('social_django.urls', namespace="social")),

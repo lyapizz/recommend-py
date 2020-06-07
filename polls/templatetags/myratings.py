@@ -6,9 +6,9 @@ from decimal import Decimal
 from django import template
 from django.template import loader
 from django.templatetags.static import static
-from star_ratings import app_settings, get_star_ratings_rating_model
 
 from polls.models import Ratings
+from star_ratings import app_settings, get_star_ratings_rating_model
 
 register = template.Library()
 
@@ -23,9 +23,17 @@ def myratings(context, item, icon_height=app_settings.STAR_RATINGS_STAR_HEIGHT,
             'Make sure you have "django.core.context_processors.request" in your templates context processor list')
 
     rating = get_star_ratings_rating_model().objects.for_instance(item)
-
     try:
-        user_rating = Ratings.objects.get(film=item, user=request.user)
+        if request.user.is_authenticated:
+            user_rating = Ratings.objects.get(film=item, user=request.user)
+        else:
+            if not request.session.session_key:
+                request.session.save()
+                # make a copy of the session key
+                # this is done because the session_key changes
+                # on login/ register
+                request.session['key_copy'] = request.session.session_key
+            user_rating = Ratings.objects.get(film=item, session=request.session.session_key)
         score = user_rating.score
     except Ratings.DoesNotExist:
         score = 0

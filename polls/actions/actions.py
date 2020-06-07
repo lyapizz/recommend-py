@@ -3,21 +3,21 @@ from django_registration.forms import User
 
 # This method return top recommendations for exact user
 # using already trained model
-from ..models import Film
+from ..models import Film, Ratings
 
 
-def printTopRecommendations(params, user):
-    print('\nTop recommendations for %s :\n' % user.username)
+def printTopRecommendations(params, request):
+    print('\nTop recommendations for %s :\n' % request.user.username)
 
-    my_predictions = prepareMyPredictions(params, user)
-    ratings = sorted(enumerate(my_predictions), key=lambda x: x[1], reverse=True)
+    my_predictions = prepareMyPredictions(params, request)
+    if my_predictions is not None:
+        ratings = sorted(enumerate(my_predictions), key=lambda x: x[1], reverse=True)
+        return printTopList(params.get('Y'), request, ratings)
 
-    return printTopList(params.get('Y'), user, ratings)
 
-
-def printTopList(Y, user, ratings):
+def printTopList(Y, request, ratings):
     movieDict = matrixToCollectionDict(Film)
-    user_index = collectionToMatrixDict(User).get(user.id)
+    user_index = getUserIndex(request)
 
     topList = list()
     count = 10
@@ -36,16 +36,25 @@ def printTopList(Y, user, ratings):
     return topList
 
 
-def prepareMyPredictions(params, user):
+def prepareMyPredictions(params, request):
     X = params.get('X')
     Theta = params.get('Theta')
     Ymean = params.get('Ymean')
 
     p = np.dot(X, Theta.T)
 
-    user_index = collectionToMatrixDict(User).get(user.id)
-    my_predictions = p[:, user_index] + Ymean[:, 0]
-    return my_predictions
+    user_index = getUserIndex(request)
+    if user_index:
+        return p[:, user_index] + Ymean[:, 0]
+
+
+def getUserIndex(request):
+    usedDict = collectionToMatrixDict(User)
+    if request.user.id:
+        user_index = usedDict.get(request.user.id)
+    else:
+        user_index = getSessions(len(usedDict)).get(request.session.session_key)
+    return user_index
 
 
 # Based on collection this method transforms entities from db to matrix structure
@@ -57,6 +66,18 @@ def collectionToMatrixDict(collection):
     for row_num, entity in enumerate(entities):
         colDict[entity.id] = row_num
     return colDict
+
+
+# session_key -> matrix structure id
+def getSessions(auth_users_len):
+    sessions = dict()
+    entities = Ratings.objects \
+        .exclude(session__isnull=True) \
+        .exclude(user_id__isnull=False) \
+        .values('session').order_by('session').distinct()
+    for entity in entities:
+        sessions[entity['session']] = auth_users_len + len(sessions)
+    return sessions
 
 
 # Based on collection this method reconstruct db entities from matrix structre

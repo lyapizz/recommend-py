@@ -56,7 +56,6 @@ class IndexView(generic.ListView):
     def dispatch(self, *args, **kwargs):
         return super(IndexView, self).dispatch(*args, **kwargs)
 
-@login_required
 def detail(request, **kwargs):
     id = kwargs['id']
     action = kwargs.get('action')
@@ -76,12 +75,11 @@ def detail(request, **kwargs):
     return HttpResponseRedirect(reverse('polls:detail', args={pk}))
 
 
-@login_required
 def top(request, **kwargs):
     # this operation should be done in background and updated
     (Y, R) = loadRatings()
     result = train(Y, R)
-    recommendations = printTopRecommendations(result, request.user)
+    recommendations = printTopRecommendations(result, request)
     return render(request, 'polls/top.html', {
         'recommendations': recommendations
     })
@@ -104,7 +102,7 @@ class Rate(View):
             res_status = 200
             try:
                 get_object = Film.objects.get(pk=self.kwargs.get('object_id'))
-                result = rate(get_object, int(data['score']), user=request.user).to_dict()
+                result = rate(get_object, int(data['score']), request=request).to_dict()
             except ValidationError as err:
                 result = {'errors': err.message}
                 res_status = 400
@@ -114,8 +112,13 @@ class Rate(View):
             else:
                 return HttpResponseRedirect(return_url)
 
-        def rate(instance, score, user=None):
-            existing_rating = Ratings.objects.get_or_create(film=instance, user=user)[0]
+        def rate(instance, score, request=None):
+            user = request.user
+            if request.user.is_authenticated:
+                existing_rating = Ratings.objects.get_or_create(film=instance, user=user)[0]
+            else:
+                existing_rating = Ratings.objects.get_or_create(film=instance, session=request.session.session_key)[0]
+
             if existing_rating.score == score:
                 existing_rating.score = 0
             else:
