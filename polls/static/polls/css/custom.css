@@ -114,7 +114,6 @@ img {
 
 #detail-container {
     height: 100%;
-    max-width: 568px;
 }
 
 #film-container {
@@ -156,7 +155,7 @@ img {
 }
 
 .shift-down {
-    margin-top: 40%;
+    margin-top: 50%;
 }
 
 .front {
@@ -187,4 +186,8 @@ img {
 .optional_sign_in {
     margin-top: 10px;
     font-size: 18px;
+}
+
+.width_limiter {
+    max-width: 568px;
 }

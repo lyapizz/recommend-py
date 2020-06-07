@@ -16,7 +16,7 @@
 </head>
 
 <body>
-<div class="wrapper">
+<div class="wrapper width_limiter">
     <div class="navbar navbar-inverse">
         <div class="container">
             <div class="navbar-header">
@@ -35,7 +35,7 @@
                 </ul>
                 {% block nav_user %}
                     {% if user.is_authenticated %}
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav">
                             <li id="nav-username"><a href="{% url 'polls:profile' %}">
                                 <span class="glyphicon glyphicon-user"></span> {{ user.get_username }} &nbsp; </a>
                             </li>
@@ -44,7 +44,7 @@
                             </li>
                         </ul>
                     {% else %}
-                        <ul class="nav navbar-nav navbar-right">
+                        <ul class="nav navbar-nav">
                             <li>
                                 <a href="{% url 'auth_login' %}">Sign in</a>
                             </li>
