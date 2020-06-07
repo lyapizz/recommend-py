@@ -29,6 +29,10 @@ def myratings(context, item, icon_height=app_settings.STAR_RATINGS_STAR_HEIGHT,
         else:
             if not request.session.session_key:
                 request.session.save()
+                # make a copy of the session key
+                # this is done because the session_key changes
+                # on login/ register
+                request.session['key_copy'] = request.session.session_key
             user_rating = Ratings.objects.get(film=item, session=request.session.session_key)
         score = user_rating.score
     except Ratings.DoesNotExist:
