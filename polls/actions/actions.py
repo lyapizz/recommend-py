@@ -10,9 +10,9 @@ def printTopRecommendations(params, request):
     print('\nTop recommendations for %s :\n' % request.user.username)
 
     my_predictions = prepareMyPredictions(params, request)
-    ratings = sorted(enumerate(my_predictions), key=lambda x: x[1], reverse=True)
-
-    return printTopList(params.get('Y'), request, ratings)
+    if my_predictions is not None:
+        ratings = sorted(enumerate(my_predictions), key=lambda x: x[1], reverse=True)
+        return printTopList(params.get('Y'), request, ratings)
 
 
 def printTopList(Y, request, ratings):
@@ -44,8 +44,8 @@ def prepareMyPredictions(params, request):
     p = np.dot(X, Theta.T)
 
     user_index = getUserIndex(request)
-    my_predictions = p[:, user_index] + Ymean[:, 0]
-    return my_predictions
+    if user_index:
+        return p[:, user_index] + Ymean[:, 0]
 
 
 def getUserIndex(request):
@@ -71,7 +71,10 @@ def collectionToMatrixDict(collection):
 # session_key -> matrix structure id
 def getSessions(auth_users_len):
     sessions = dict()
-    entities = Ratings.objects.exclude(session__isnull=True).values('session').order_by('session').distinct()
+    entities = Ratings.objects \
+        .exclude(session__isnull=True) \
+        .exclude(user_id__isnull=False) \
+        .values('session').order_by('session').distinct()
     for entity in entities:
         sessions[entity['session']] = auth_users_len + len(sessions)
     return sessions

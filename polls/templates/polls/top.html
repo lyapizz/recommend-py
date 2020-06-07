@@ -4,20 +4,25 @@
 
 {% block content %}
     <div class="mg-5">
-        <h3>Top Recommendations for you:</h3>
-        <ul>
-            {% for recommendation in recommendations %}
-                <li>Predicting rating {{ recommendation.0|floatformat:1 }} for
-                    <a href="https://www.imdb.com/title/{{ recommendation.1.imdbID }}">{{ recommendation.1.Title }}
-                        ({{ recommendation.1.Year }})</a> | <a
-                            href="{% url 'polls:detail' recommendation.1.id %}">Rate?</a>
-                </li>
-            {% endfor %}
-            {% if not user.is_authenticated %}
-                <li class="optional_sign_in">Want to save your recommendations?
-                    <a href="{% url 'auth_login' %}">Sign in</a>
-                </li>
-            {% endif %}
-        </ul>
+        {% if recommendations %}
+            <h3>Top Recommendations for you:</h3>
+            <ul>
+                {% for recommendation in recommendations %}
+                    <li>Predicting rating {{ recommendation.0|floatformat:1 }} for
+                        <a href="https://www.imdb.com/title/{{ recommendation.1.imdbID }}">{{ recommendation.1.Title }}
+                            ({{ recommendation.1.Year }})</a> | <a
+                                href="{% url 'polls:detail' recommendation.1.id %}">Rate?</a>
+                    </li>
+                {% endfor %}
+
+                {% if not user.is_authenticated %}
+                    <li class="optional_sign_in">Want to save your recommendations?
+                        <a href="{% url 'auth_login' %}">Sign in</a>
+                    </li>
+                {% endif %}
+            </ul>
+        {% else %}
+            <h3>Vote for films to get recommendations.</h3>
+        {% endif %}
     </div>
 {% endblock %}
