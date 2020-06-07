@@ -1,5 +1,5 @@
 import numpy as np
-from django.test import TestCase
+from django.test import TestCase, RequestFactory
 from django_registration.forms import User
 
 from polls.actions.actions import collectionToMatrixDict, matrixToCollectionDict, prepareMyPredictions, printTopList
@@ -53,16 +53,18 @@ class Test(TestCase):
 
     def test_prepareMyPredictions_LastUser(self):
         # prepare
-        user = User.objects.get(id=99)
+        request = RequestFactory().get('/')
+        request.user = User.objects.get(id=99)
         # test
-        result = prepareMyPredictions(self._params, user)
+        result = prepareMyPredictions(self._params, request)
         # expect
         expected = np.array([[1], [2], [3], [4], [5]])
         self.assertEqual(expected.all(), result.all())
 
     def test_printTopList(self):
         # prepare
-        user = User.objects.get(id=99)
+        request = RequestFactory().get('/')
+        request.user = User.objects.get(id=99)
         ratings = list()
         ratings.append((4, 5))
         ratings.append((3, 4))
@@ -71,7 +73,7 @@ class Test(TestCase):
         ratings.append((0, 1))
         Y = np.array([[1, 1, 1, 0], [2, 2, 2, 0], [3, 3, 3, 0], [4, 4, 4, 4], [5, 5, 5, 0]])
         # test
-        result = printTopList(Y, user, ratings)
+        result = printTopList(Y, request, ratings)
         # expect
         expectedList = list()
         expectedList.append((5, Film.objects.get(Title="film5")))
