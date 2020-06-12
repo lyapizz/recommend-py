@@ -46,6 +46,7 @@ class Film(models.Model):
     # boxOffice = models.CharField(max_length=200)
     # production = models.CharField(max_length=200)
     # website = models.CharField(max_length=200)
+    keywords = models.CharField(max_length=1000, null=True)
 
     objects = models.Manager
 
@@ -91,3 +92,15 @@ class Ratings(models.Model):
             'percentage': self.percentage(),
             'user_rating': self.score
         }
+
+
+class Question(models.Model):
+    text = models.CharField(max_length=1000, null=False)
+
+
+class FilmQuestion(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, null=False)
+    film = models.ForeignKey(Film, on_delete=models.CASCADE, null=False)
+    average = models.FloatField(default=0)
+    count = models.PositiveIntegerField(default=1)
+    fitness = models.FloatField(default=0)  # 1 - most reliable, 0 less #
