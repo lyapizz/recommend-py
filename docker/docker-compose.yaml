@@ -1,0 +1,9 @@
+version: '3.1'
+services:
+  mongo:
+    image: mongo:4.2.15
+    restart: always
+    command: mongod --port 27018
+    ports:
+      - '27018:27018'
+    container_name: mongo-db-py

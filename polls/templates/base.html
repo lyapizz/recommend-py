@@ -1,6 +1,6 @@
 {% load static from staticfiles %}
 {% load bootstrap3 %}
-{% load fontawesome %}
+{% load fontawesome_5 %}
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +10,6 @@
 
     <title>{% block title %}{% endblock %}</title>
     {% bootstrap_css %}
-    {% fontawesome_stylesheet %}
     <link href="{% static "polls/css/custom.css" %}" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
 </head>
